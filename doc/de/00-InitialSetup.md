@@ -41,3 +41,87 @@ Man kann `dd` signalisieren, dass es den aktuellen Fortschritt ausgeben soll:
 Den `sudo kill` Befehl kann man immer wieder aufrufen, wenn man den aktuellen Fortschritt wissen will.
 
 #### Windows: TODO
+
+## Zusätzliche Dateien auf die Karte spielen
+
+Nach dem Formatieren kann man die SD-Karte einhängen, und die später erforderlichen Setup-Dateien darauf kopieren.
+Da es sich um eine ext4-Partition handelt, geht das nicht unter Windows.
+
+Am einfachsten klont man dieses git-Repository auf die SD-Karte:
+
+    git clone https://github.com/PRIArobotics/HedgehogLightSetup.git
+
+Alternativ kann man das Repository [als zip-Datei herunterladen](https://github.com/PRIArobotics/HedgehogLightSetup/archive/master.zip) und auf die SD-Karte entpacken.
+
+## Änderungen anwenden
+
+Im folgenden wird davon ausgegangen, dass die Setup-Dateien auf der Karte unter `/home/orangepi/HedgehogLightSetup` liegen.
+
+Details zur Verwendung des Pi (Ethernet, UART-Konsole, SSH, Login-Daten) finden sich im [nächsten Dokument](01-Working.md).
+Die dortigen Anweisungen sind auch hier gültig, mit der Ausnahme, dass Ethernet erst in Phase 2 funktioniert.
+
+### Phase 1
+
+Nun legt man die SD-Karte in den Pi ein, bootet, und loggt sich ein.
+Anschließend führt man das 1. Setup-Skript mit Root-Rechten aus:
+
+    cd /home/orangepi/HedgehogLightSetup
+    chmod a+x setup_phase1.sh
+    sudo ./setup_phase1.sh
+
+Die folgenden Aufgaben werden durch das Skript erledigt:
+
+* Partition vergrößern mit `sudo fs_resize`
+
+  Das Image füllt nicht die Ganze Karte aus; hier wird die Partitionsgröße an die Karte angepasst.
+
+* DHCP für `eth0` automatisch aktivieren
+
+  Damit der Pi über Ethernet später automatisch eine Adresse erhält, wird eine Datei in `/etc/network/interfaces.d/` erstellt.
+
+* Ein Neustart: `reboot`
+
+  Der Neustart ist notwendig, damit die Änderung der Partitionsgröße wirksam wird und zusätzliche Software installiert werden kann.
+
+### Phase 2
+
+Der Pi benötigt jetzt Internet, deshalb muss er an ein LAN mit DHCP angeschlossen werden.
+In Phase 2 kann man sich auch per SSH einloggen.
+Nun führt man das 2. Setup-Skript mit Root-Rechten aus:
+
+    cd /home/orangepi/HedgehogLightSetup
+    chmod a+x setup_phase2.sh
+    sudo ./setup_phase2.sh
+
+Die folgenden Aufgaben werden durch das Skript erledigt:
+
+* Software installieren
+
+  Es werden Updates und benötigte Software installiert:
+
+  `sunxi-tools`: zum Erstellen von `script.bin`
+
+* `/media/boot/script.bin` ersetzen
+
+  Das Original konfiguriert einige Pins nicht so, wie wir es benötigen, wodurch UARTs und GPIOs nicht gleichzeitig funktionieren.
+  Außerdem ist UART1 standardmäßig nicht aktiviert.
+  Weiters konfigurieren wir alle UARTs für Mode 2 ohne `CTS`/`RTS`.
+
+  Das neue `script.bin` wird direkt auf dem Pi aus `orange_pi2.fex` erstellt, es können also vor Ausführung des Skripts noch Anpassungen vorgenommen werden.
+  Das Originale Skript, auf dem das von uns bereitgestellte basiert, ist [hier](https://github.com/loboris/OrangePi-BuildLinux/blob/master/orange/orange_pi2.fex) verfügbar.
+
+* Kernelmodul `gpio-sunxi` wird in `/etc/modules aktiviert`.
+
+  Dadurch werden die GPIOs verfügbar.
+
+* **TODO** Zugriff auf IOs (GPIO, USART, SPI, …) ohne Root-Rechte ermöglichen
+
+* Ein Neustart: `reboot`
+
+## Aufräumen
+
+Die Setup-Dateien können abschließend vom Pi gelöscht werden.
+
+    cd /home/orangepi
+    rm -rf HedgehogLightSetup
+
