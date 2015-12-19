@@ -1,4 +1,8 @@
-# HedgehogLightSetup
+# OrangePi Setup Scripts für Hedgehog Light
+
+Dieses Repository enthält Scripts und Dokumentation zur Vorbereitung eines OrangePi mit Hedgehog Light.
+
+Dieses Repository enthält eine abgeänderte Version von `orange_pi2.fex` von [hier](https://github.com/loboris/OrangePi-BuildLinux/blob/master/orange/orange_pi2.fex).
 
 1. [Vorbereiten eines Orange Pi](00-InitialSetup.md)
 2. [Arbeiten mit dem Orange Pi](01-Working.md)
