@@ -2,7 +2,7 @@
 
 if [ "$(id -u)" != "0" ]; then
 	echo "Script must be run as root!"
-	exit 0
+	exit 1
 fi
 
 echo y | fs_resize
