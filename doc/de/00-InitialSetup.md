@@ -27,6 +27,11 @@ Dann muss man die SD-Karte finden. Dabei hilft beispielsweise `fdisk`:
 
 Wobei `/dev/sda` die Festplatte ist, `/dev/mmcblk0` also die SD-Karte.
 Dann kann man die SD-Karte (nicht eine eventuell darauf befindliche Partition wie etwa `/dev/mmcblk0p1`!) mit `dd` beschreiben.
+
+**Wichtig:** wenn man `sudo dd` im Hintergrund ausgeführt wird und ein Passwort verlangt, wird auch die Passwortabfrage im Hintergrund ausgeführt.
+In diesem Fall startet man den Befehl am besten im Vordergrund (ohne `&`) und gibt das Passwort ein.
+Anschließend kann man den Prozess mit `^Z`, `bg 1` in den Hintergrund verschieben.
+
 Man kann `dd` signalisieren, dass es den aktuellen Fortschritt ausgeben soll:
 
     sudo dd if=OrangePI-PC_Ubuntu_Vivid_Mate.img of=<Device> & #dd im Hintergrund ausführen
