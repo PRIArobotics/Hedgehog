@@ -6,4 +6,7 @@ Dieses Repository enthält eine abgeänderte Version von `orange_pi2.fex` von [h
 
 1. [Vorbereiten eines Orange Pi](00-InitialSetup.md)
 2. [Arbeiten mit dem Orange Pi](01-Working.md)
-3. **TODO**
+
+* [Python auf dem Orange Pi](python.md)
+* **TODO**
+
