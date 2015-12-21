@@ -8,7 +8,7 @@ Dieser Abschnitt wird mit den ersten gefertigten Boards obsolet werden.
 
 Die Pins am Orange Pi sind nicht beschriftet. Hier sind die Pins aufgelistet, wobei sich neben Pin 1 am Pi ein kleiner Pfeil befindet. Neben den roten Pins sind 5V und GND relevant.
 
-**TODO** Bild
+![Orange Pi Pinout](../res/orangepi_pinout.png)
 
 Die Zuordnung ist wie folgt:
 
@@ -41,4 +41,8 @@ Hier ein schneller Überblick zur Installation:
 * Nun kann man seine Programme auf den STM32 spielen (das Environment muss dazu nicht aktiviert sein):
 
         sudo env/bin/stm32flasher "$FILE"
+
+## Toolchain
+
+**TODO**
 
