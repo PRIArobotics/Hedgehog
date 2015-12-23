@@ -20,37 +20,26 @@ Die Zuordnung ist wie folgt:
     UART3_TX … PA10
     UART3_RX … PA9
 
-## Flashen
+## C-Toolchain
 
-Zum Flashen kann der [STM32Flasher](https://github.com/PRIArobotics/STM32Flasher) verwendet werden.
-Hier ein schneller Überblick zur Installation:
+### Benötigte Software
+
+Die folgende Software muss zunächst installiert werden:
 
 * Für den Flasher wird [Python](python.md) benötigt.
 
-* `git` ist auf dem Orange Pi nicht vorinstalliert, wird aber zur Installation von `STM32Flasher` benötigt (und ist auch ansonsten bei der Software-Entwiclung sehr nützlich):
+* `git` ist auf dem Orange Pi nicht vorinstalliert, wird aber zur Installation von `STM32Flasher` benötigt.
+Außerdem kann damit das Example- oder Template-Projekt geklont werden:
 
         sudo apt-get -y install git
 
-* Danach installiert man wie beschrieben `STM32Flasher`:
+* Für den STM32-Microcontroller benötigt man die GCC-ARM-Toolchain, die folgendermaßen installiert wird:
 
-        python3 -m virtualenv env
-        . env/bin/activate
-        pip install git+git://github.com/PRIArobotics/STM32Flasher.git
-        deactivate
+        sudo apt-get -y install build-essential gcc-arm-none-eabi
 
-* Nun kann man seine Programme auf den STM32 spielen (das Environment muss dazu nicht aktiviert sein):
+* Zusätzlich benötigt man den `unzip`-Befehl zum Entpacken der Standard Library:
 
-        sudo env/bin/stm32flasher "$FILE"
-
-## C Toolchain
-
-Für den STM32-Microcontroller benötigt man die GCC-ARM-Toolchain, die folgendermaßen installiert wird:
-
-    sudo apt-get -y install build-essential gcc-arm-none-eabi
-
-Zusätzlich benötigt man den `unzip`-Befehl zum Entpacken der Standard Library:
-
-    sudo apt-get -y install unzip
+        sudo apt-get -y install unzip
 
 ### STM32F303VCT6
 
@@ -67,8 +56,10 @@ Das Makefile automatisiert die folgenden Setup-Schritte:
 2. Kopieren der `.c`- und `.h`-Files der Projektvorlage nach `src` bzw. `inc`
 
    Diese befindet sich im folgenden Ordner:
-   
+
         STM32F30x_DSP_StdPeriph_Lib_V.../Projects/STM32F30x_StdPeriph_Templates/
+
+3. Installieren des [Flashers](https://github.com/PRIArobotics/STM32Flasher)
 
 Automatisiert:
 
@@ -78,10 +69,12 @@ Automatisiert:
     make unpack
     # Erstellt Ordner src und inc & kopiert die .c- und .h-Vorlage-Dateien dort hin.
     make template
+    # installiert den Flasher im Projektverzeichnis
+    make flasher
 
 Das Makefile referenziert alle benötigten Bibliotheken und stellt die folgenden wichtigen Targets zur Verfügung:
 
-    # Löscht alle Binärdateien, etwa .o-, .elf, .bin und .map-Dateien
+    # Löscht alle Binärdateien, etwa .o-, .elf-, .bin- und .map-Dateien
     make clean
     # Kompiliert und linkt das Programm. Das Ergebnis ist eine .bin-Datei
     make
@@ -95,17 +88,20 @@ Das Makefile referenziert alle benötigten Bibliotheken und stellt die folgenden
 
 **TODO**
 
-Beispiel-Projekt
+### Example-Projekt
 
-[Hier](https://github.com/PRIArobotics/STM32Example) gibt es ein Beispiel-Projekt mit der beschriebenen Toolchain.
+[Hier](https://github.com/PRIArobotics/STM32Example) gibt es ein Beispiel-Projekt das die beschriebene Toolchain benutzt.
 Man kann die Toolchain folgendermaßen verifizieren:
 
     git clone https://github.com/PRIArobotics/STM32Example.git
     cd STM32Example/
     # Nur einmal nach dem Klonen notwendig
-    make download && make unpack
+    make download && make unpack && make flasher
     # Für jede Änderung
     make && make flash
+
+`make template` ist nur notwendig, wenn man das Template-Projekt als Vorlage für ein komplett neues Projekt benutzt.
+Anwendungsprojekte, wie das Example-Projekt, enthalten bereits die durch `make template` kopierten Dateien, und mehr.
 
 Wenn alles funktioniert, sollten die LEDs an `PE14` und `PE15` mit 1Hz blinken.
 
