@@ -86,6 +86,7 @@ Das Makefile referenziert alle benötigten Bibliotheken und stellt die folgenden
     # Kompiliert und linkt das Programm. Das Ergebnis ist eine .bin-Datei
     make
     # Lädt das Programm auf den Microcontroller
+    # Das Makefile geht momentan davon aus, dass der Flasher unter ~/env installiert ist.
     make flash
 
 ### STM32F4
@@ -93,4 +94,18 @@ Das Makefile referenziert alle benötigten Bibliotheken und stellt die folgenden
 [STM32F4xx](http://www.st.com/web/catalog/tools/FM147/CL1794/SC961/SS1743/LN1939/PF257901#orderable).
 
 **TODO**
+
+Beispiel-Projekt
+
+[Hier](https://github.com/PRIArobotics/STM32Example) gibt es ein Beispiel-Projekt mit der beschriebenen Toolchain.
+Man kann die Toolchain folgendermaßen verifizieren:
+
+    git clone https://github.com/PRIArobotics/STM32Example.git
+    cd STM32Example/
+    # Nur einmal nach dem Klonen notwendig
+    make download && make unpack
+    # Für jede Änderung
+    make && make flash
+
+Wenn alles funktioniert, sollten die LEDs an `PE14` und `PE15` mit 1Hz blinken.
 
