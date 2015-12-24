@@ -115,13 +115,18 @@ Die folgenden Aufgaben werden durch das Skript erledigt:
   Das neue `script.bin` wird direkt auf dem Pi aus `orange_pi2.fex` erstellt, es können also vor Ausführung des Skripts noch Anpassungen vorgenommen werden.
   Das Originale Skript, auf dem das von uns bereitgestellte basiert, ist [hier](https://github.com/loboris/OrangePi-BuildLinux/blob/master/orange/orange_pi2.fex) verfügbar.
 
-* Kernelmodul `gpio-sunxi` wird in `/etc/modules aktiviert`.
+* Kernelmodul `gpio-sunxi` in `/etc/modules` aktivieren
 
-  Dadurch werden die GPIOs verfügbar.
+  Dadurch werden die GPIOs über das `sysfs` verfügbar.
 
-* Dem User Zugriff auf GPIOs geben
+* Dem `orangepi`-User Zugriff auf IOs geben
 
-* **TODO** Zugriff auf andere IOs (SPI, …) ohne Root-Rechte ermöglichen/testen
+  Der User wird der Gruppe `gpio` hinzugefügt.
+  Durch ein Startup-Script wird den notwendigen Dateien diese Gruppe zugewiesen.
+
+  Der User ist schon von vornherein Teil der `dialout`-Gruppe, wodurch er Zugriff auf die USARTs hat.
+
+  **TODO** Zugriff auf andere IOs (SPI, …) ohne Root-Rechte ermöglichen/testen
 
 * Ein Neustart: `reboot`
 
