@@ -119,7 +119,9 @@ Die folgenden Aufgaben werden durch das Skript erledigt:
 
   Dadurch werden die GPIOs verfügbar.
 
-* **TODO** Zugriff auf IOs (GPIO, USART, SPI, …) ohne Root-Rechte ermöglichen
+* Dem User Zugriff auf GPIOs geben
+
+* **TODO** Zugriff auf andere IOs (SPI, …) ohne Root-Rechte ermöglichen/testen
 
 * Ein Neustart: `reboot`
 
