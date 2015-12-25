@@ -28,7 +28,7 @@ Die folgende Software muss zunächst installiert werden:
 
 * Für den Flasher wird [Python](python.md) benötigt.
 
-* `git` ist auf dem Orange Pi nicht vorinstalliert, wird aber zur Installation von `STM32Flasher` benötigt.
+* `git` ist auf dem Orange Pi nicht vorinstalliert, wird aber zur Installation des Flashers benötigt.
 Außerdem kann damit das Example- oder Template-Projekt geklont werden:
 
         sudo apt-get -y install git
@@ -40,6 +40,17 @@ Außerdem kann damit das Example- oder Template-Projekt geklont werden:
 * Zusätzlich benötigt man den `unzip`-Befehl zum Entpacken der Standard Library:
 
         sudo apt-get -y install unzip
+
+### Flasher
+
+Der Flasher kann folgendermaßen in einem beliebigen Verzeichnis installiert werden.
+Anschließend wird ein Symlink erstellt, damit der Flasher direkt aufgerufen werden kann.
+
+    python3 -m virtualenv flasher
+    . flasher/bin/activate
+    pip install git+git://github.com/PRIArobotics/STM32Flasher.git
+    deactivate
+    sudo ln -s `realpath flasher/bin/stm32flasher` /usr/local/bin/
 
 ### STM32F303VCT6
 
@@ -59,8 +70,6 @@ Das Makefile automatisiert die folgenden Setup-Schritte:
 
         STM32F30x_DSP_StdPeriph_Lib_V.../Projects/STM32F30x_StdPeriph_Templates/
 
-3. Installieren des [Flashers](https://github.com/PRIArobotics/STM32Flasher)
-
 Automatisiert:
 
     # löscht ein heruntergeladenes Archiv und lädt es erneut herunter
@@ -69,8 +78,6 @@ Automatisiert:
     make unpack
     # Erstellt Ordner src und inc & kopiert die .c- und .h-Vorlage-Dateien dort hin.
     make template
-    # installiert den Flasher im Projektverzeichnis
-    make flasher
 
 Das Makefile referenziert alle benötigten Bibliotheken und stellt die folgenden wichtigen Targets zur Verfügung:
 
@@ -79,7 +86,7 @@ Das Makefile referenziert alle benötigten Bibliotheken und stellt die folgenden
     # Kompiliert und linkt das Programm. Das Ergebnis ist eine .bin-Datei
     make
     # Lädt das Programm auf den Microcontroller
-    # Das Makefile geht momentan davon aus, dass der Flasher unter ~/env installiert ist.
+    # Der Flasher muss als `stm32flasher` aufrufbar sein.
     make flash
 
 ### STM32F4
@@ -96,7 +103,7 @@ Man kann die Toolchain folgendermaßen verifizieren:
     git clone https://github.com/PRIArobotics/STM32Example.git
     cd STM32Example/
     # Nur einmal nach dem Klonen notwendig
-    make download && make unpack && make flasher
+    make download && make unpack
     # Für jede Änderung
     make && make flash
 
