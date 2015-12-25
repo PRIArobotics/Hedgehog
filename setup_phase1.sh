@@ -7,10 +7,7 @@ fi
 
 echo y | fs_resize
 
-cat > /etc/network/interfaces.d/eth0 <<EOF
-auto eth0
-iface eth0 inet dhcp
-EOF
+cp res/eth0 /etc/network/interfaces.d/
 
 echo "SYSTEM WILL NOW REBOOT"
 reboot

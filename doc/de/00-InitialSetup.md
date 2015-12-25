@@ -112,7 +112,7 @@ Die folgenden Aufgaben werden durch das Skript erledigt:
   Außerdem ist UART1 standardmäßig nicht aktiviert.
   Weiters konfigurieren wir alle UARTs für Mode 2 ohne `CTS`/`RTS`.
 
-  Das neue `script.bin` wird direkt auf dem Pi aus `orange_pi2.fex` erstellt, es können also vor Ausführung des Skripts noch Anpassungen vorgenommen werden.
+  Das neue `script.bin` wird direkt auf dem Pi aus `res/orange_pi2.fex` erstellt, es können also vor Ausführung des Skripts noch Anpassungen vorgenommen werden.
   Das Originale Skript, auf dem das von uns bereitgestellte basiert, ist [hier](https://github.com/loboris/OrangePi-BuildLinux/blob/master/orange/orange_pi2.fex) verfügbar.
 
 * Kernelmodul `gpio-sunxi` in `/etc/modules` aktivieren

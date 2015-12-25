@@ -23,44 +23,14 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-fex2bin orange_pi2.fex > /media/boot/script.bin
+fex2bin res/orange_pi2.fex > /media/boot/script.bin
 
 sed -i -re 's/^#+gpio-sunxi$/gpio-sunxi/' /etc/modules
 
 groupadd gpio
 usermod -a -G gpio orangepi
 
-cat > /etc/init.d/gpio-permissions <<EOF
-#!/bin/sh
-
-### BEGIN INIT INFO
-# Provides:          gpio-test.sh
-# Required-Start:    $remote_fs $syslog
-# Required-Stop:     $remote_fs $syslog
-# Default-Start:     2 3 4 5
-# Default-Stop:      0 1 6
-# Short-Description: Set group of GPIO sysfs files
-### END INIT INFO
-
-# Using the lsb functions to perform the operations.
-. /lib/lsb/init-functions
-
-case $1 in
-start)
-    find -L /sys/class/gpio_sw -maxdepth 2 -type f -exec chgrp gpio '{}' '+' 2> /dev/null
-    log_end_msg 0
-    ;;
-stop|restart|status|reload)
-    log_end_msg 0
-    ;;
-*)
-    # For invalid arguments, print the usage message.
-    echo "Usage: $0 {start|stop|restart|reload|status}"
-    exit 2
-    ;;
-esac
-EOF
-
+cp res/gpio-permissions /etc/init.d/
 chmod +x /etc/init.d/gpio-permissions
 update-rc.d gpio-permissions defaults
 
