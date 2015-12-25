@@ -58,6 +58,11 @@ Am einfachsten klont man dieses git-Repository auf die SD-Karte:
 
 Alternativ kann man das Repository [als zip-Datei herunterladen](https://github.com/PRIArobotics/HedgehogLightSetup/archive/master.zip) und auf die SD-Karte entpacken.
 
+### Optional: Ethernet sofort verfügbar machen
+
+Falls man keine andere Möglichkeit (UART-Konsole, Bildschirm & Tastatur) )hat, oder nutzen will, kann man gleich jetzt die `res/eth0`-Datei nach `/etc/network/interfaces.d/` kopieren.
+Dann ist schon in Phase 1 das Einloggen über SSH möglich.
+
 ## Änderungen anwenden
 
 Im folgenden wird davon ausgegangen, dass die Setup-Dateien auf der Karte unter `/home/orangepi/HedgehogLightSetup` liegen.
