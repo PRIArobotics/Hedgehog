@@ -1,6 +1,7 @@
 # STM32-Entwicklung
 
 Dieses Dokument soll beschreiben, wie direkt auf dem Orange Pi Software für den verbundenen STM32-Microcontroller Software entwickelt werden kann.
+Unten wird weiters beschrieben, wie mit einer anderen Entwicklungsmaschine Programme über den Orange Pi auf den Microcontroller geladen werden können.
 
 ## Anschlüsse
 
@@ -111,4 +112,20 @@ Man kann die Toolchain folgendermaßen verifizieren:
 Anwendungsprojekte, wie das Example-Projekt, enthalten bereits die durch `make template` kopierten Dateien, und mehr.
 
 Wenn alles funktioniert, sollten die LEDs an `PE14` und `PE15` mit 1Hz blinken.
+
+### Entwickeln auf einer anderen Maschine
+
+Die kompatibelste Variante ist, direkt auf dem Orange Pi zu entwickeln.
+Oft ist es aber wünschenswert, auf einer anderen Maschine zu entwickeln:
+Komfortablere Entwicklungsumgebung, schnelleres kompilieren, ...
+
+Dazu muss die vorgestellte (oder eine andere) Toolchain auf diesem Gerät installiert werden.
+Sobald man ein `.bin`-File hat, kann man es folgendermaßen auf den Microcontroller spielen:
+
+    rsync -avz $NAME.bin orangepi@10.42.0.226:/tmp/
+    ssh orangepi@10.42.0.226 stm32flasher /tmp/$NAME.bin
+
+Dafür gibt es im Template-Projekt schon ein Target:
+
+    make remote-flash
 
