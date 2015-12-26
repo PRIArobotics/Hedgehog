@@ -21,28 +21,18 @@ Die Zuordnung ist wie folgt:
     UART3_TX … PA10
     UART3_RX … PA9
 
-## C-Toolchain
+## Flasher
 
-### Benötigte Software
+Unabhängig davon, wie man seine Programme entwickelt, muss man das `.bin`-File am Ende auf den Microcontroller laden.
+das Passiert mit dem [`STM32Flasher`](https://github.com/PRIArobotics/STM32Flasher).
 
 Die folgende Software muss zunächst installiert werden:
 
-* Für den Flasher wird [Python](python.md) benötigt.
+* [Python](python.md)
 
-* `git` ist auf dem Orange Pi nicht vorinstalliert, wird aber zur Installation des Flashers benötigt.
-Außerdem kann damit das Example- oder Template-Projekt geklont werden:
+* `git`
 
         sudo apt-get -y install git
-
-* Für den STM32-Microcontroller benötigt man die GCC-ARM-Toolchain, die folgendermaßen installiert wird:
-
-        sudo apt-get -y install build-essential gcc-arm-none-eabi
-
-* Zusätzlich benötigt man den `unzip`-Befehl zum Entpacken der Standard Library:
-
-        sudo apt-get -y install unzip
-
-### Flasher
 
 Der Flasher kann folgendermaßen in einem beliebigen Verzeichnis installiert werden.
 Anschließend wird ein Symlink erstellt, damit der Flasher direkt aufgerufen werden kann.
@@ -52,6 +42,19 @@ Anschließend wird ein Symlink erstellt, damit der Flasher direkt aufgerufen wer
     pip install git+git://github.com/PRIArobotics/STM32Flasher.git
     deactivate
     sudo ln -s `realpath flasher/bin/stm32flasher` /usr/local/bin/
+
+## C-Toolchain
+
+Zum Kompilieren und Linken von C-Programmen für den Controller benötigt man die entsprechende Toolchain.
+Die Toolchain kann auf dem Orange Pi, oder auf einem anderen Debian-basierten System, wie folgt installiert werden.
+
+Die folgende Software muss zunächst installiert werden:
+
+* Für den STM32-Microcontroller benötigt man die GCC-ARM-Toolchain.
+
+* Zusätzlich benötigt man den `unzip`-Befehl zum Entpacken der Standard Library.
+
+    sudo apt-get -y install build-essential gcc-arm-none-eabi unzip
 
 ### STM32F303VCT6
 
@@ -113,13 +116,13 @@ Anwendungsprojekte, wie das Example-Projekt, enthalten bereits die durch `make t
 
 Wenn alles funktioniert, sollten die LEDs an `PE14` und `PE15` mit 1Hz blinken.
 
-### Entwickeln auf einer anderen Maschine
+## Entwickeln auf einer anderen Maschine
 
-Die kompatibelste Variante ist, direkt auf dem Orange Pi zu entwickeln.
-Oft ist es aber wünschenswert, auf einer anderen Maschine zu entwickeln:
+Oft ist es wünschenswert, auf einer anderen Maschine zu entwickeln:
 Komfortablere Entwicklungsumgebung, schnelleres kompilieren, ...
 
 Dazu muss die vorgestellte (oder eine andere) Toolchain auf diesem Gerät installiert werden.
+Der Flasher muss auf dem Orange Pi installiert sein.
 Sobald man ein `.bin`-File hat, kann man es folgendermaßen auf den Microcontroller spielen:
 
     rsync -avz $NAME.bin orangepi@10.42.0.226:/tmp/
