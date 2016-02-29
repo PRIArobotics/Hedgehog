@@ -17,9 +17,9 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-apt-get -y install sunxi-tools
+apt-get -y install sunxi-tools git make gcc
 if [ $? -ne 0 ]; then
-    echo "ERROR: Installing sunxi-tools failed! Are you connected to the Internet?"
+    echo "ERROR: Installing tools failed! Are you connected to the Internet?"
     exit 1
 fi
 
