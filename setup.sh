@@ -40,7 +40,8 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-nmcli connection add type ethernet ifname eth0
+nmcli connection delete eth0
+nmcli connection add type ethernet ifname eth0 autoconnect yes
 
 echo "SYSTEM WILL NOW REBOOT"
 reboot

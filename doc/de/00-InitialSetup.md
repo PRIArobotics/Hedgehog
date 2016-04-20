@@ -9,7 +9,7 @@ Wir verwenden Armbian für den Orange Pi 2.
 [Server](http://mirror.igorpecovnik.com/Armbian_5.05_Orangepih3_Debian_jessie_3.4.110.zip)- sowie
 [Desktop](http://mirror.igorpecovnik.com/Armbian_5.05_Orangepih3_Debian_jessie_3.4.110_desktop.zip)-Vesion.
 
-Die Installation fünktioniert wie auch bei einem Raspberry Pi, Anleitungen gibt es [hier](https://www.raspberrypi.org/documentation/installation/installing-images/README.md).
+Die Installation funktioniert wie auch bei einem Raspberry Pi, Anleitungen gibt es [hier](https://www.raspberrypi.org/documentation/installation/installing-images/README.md).
 Nach dem Download und entpacken wird es mit geeigneter Software auf eine MicroSD-Karte gespielt.
 
 ## Armbian zum ersten mal starten
@@ -19,6 +19,7 @@ Die dortigen Anweisungen sind auch hier gültig.
 
 Nach dem ersten Login (Username: `root`, Passwort: `1234`) muss das Root-Passwort geändert und ein zweiter Benutzer ertellt werden.
 Folge dazu den Anweisungen am Bildschirm.
+
 Wir gehen in weiterer Folge davon aus, dass der neue Benutzer `hedgehog` genannt wurde
 und sein Home-Verzeichnis `/home/hedgehog` ist.
 Für Entwicklungsgeräte empfehlen wir `hedgehog`/`hedgehog` als Login-Daten.
