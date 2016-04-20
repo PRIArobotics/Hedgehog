@@ -4,7 +4,6 @@ Dieses Dokument soll beschreiben, wie man einen vorbereiteten Orange Pi in Betri
 
 Die Stromversorgung erfolgt über das mitgelieferte Kabel von einem USB-Anschluss aus.
 Zusätzlich braucht man noch Eingabe- und Ausgabemöglichkeiten.
-Die Login-Daten sind standardmäßig `orangepi`/`orangepi`.
 
 ## Direkt
 
