@@ -4,6 +4,7 @@ Dieses Dokument soll beschreiben, wie man einen vorbereiteten Orange Pi in Betri
 
 Die Stromversorgung erfolgt über das mitgelieferte Kabel von einem USB-Anschluss aus.
 Zusätzlich braucht man noch Eingabe- und Ausgabemöglichkeiten.
+Benutzername und Passwort lauten (standardmäßig) `hedgehog`.
 
 ## Direkt
 
@@ -85,13 +86,12 @@ Insgesamt also:
 ### Per SSH verbinden
 
 Abschließend verbindet man sich per SSH mit dem Orange Pi.
-Der Benutzername lautet `orangepi`.
 
 #### Linux/Mac
 
-Wenn die IP-Adresse zum Beispiel `10.42.0.226` ist:
+Wenn die IP-Adresse zum Beispiel `10.42.0.115` ist:
 
-    ssh orangepi@10.42.0.226
+    ssh hedgehog@10.42.0.115
 
 #### Windows: TODO
 
