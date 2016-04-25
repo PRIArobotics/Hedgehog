@@ -95,6 +95,22 @@ Die folgenden Befehle helfen beim Verbinden mit einem Drahtlosnetzwerk:
     # Stellt eine Verbindung her. Siehe auch `nmcli device wifi help`
     nmcli device wifi connect SSID password PASSWORD
 
+## (optional) Locale einrichten
+
+Die einzige standardmäßig aktivierte Locale ist `en_US.UTF-8`.
+Wenn man sich per SSH mit dem Controller verbindet, wird aber die Locale des sich verbindenden Systems übernommen, z.B. `de_DE.UTF-8`.
+Die dann aktive Locale ist also im System nicht aktiviert!
+Das kann bei manchen Programmen zu Problemen führen, von Warnungen bishin zu fehlerhaften Ausführungen.
+
+Um die aktuell ausgewählte, oder eine bestimmte, Locale zu aktivieren, kann man folgenden Befehl nutzen:
+
+    cd /home/hedgehog/HedgehogLightSetup
+    chmod a+x setup.sh
+    # aktuelle Locale
+    sudo ./fixlocale.sh
+    # bestimmte Locale (hier: aktuelle Locale)
+    sudo ./fixlocale.sh "$LC_NAME"
+
 ## Aufräumen
 
 Die Setup-Dateien können abschließend vom Pi gelöscht werden.
