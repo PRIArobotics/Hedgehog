@@ -20,7 +20,7 @@ fi
 mv /boot/bin/orangepi2.bin /boot/bin/orangepi2.bin.orig
 fex2bin res/orangepi2.fex > /boot/bin/orangepi2.bin
 
-sed -i -re 's/^#+gpio-sunxi$/gpio-sunxi/' /etc/modules
+sed -i -re 's/^#+(gpio[-_]sunxi)$/\1/' /etc/modules
 
 groupadd gpio
 usermod -a -G gpio `id -nu 1000`
