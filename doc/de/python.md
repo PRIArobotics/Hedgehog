@@ -18,6 +18,11 @@ Damit können für beide Python-Versionen Environments erstellt werden.
     sudo apt-get -y install python3-pip
     pip3 install virtualenv
 
+Für die Installation mancher Module sind außerdem die Header-Definitionen von Python notwendig.
+Diese werden folgendermaßen für beide Versionen installiert:
+
+    sudo apt-get -y install python-dev python3-dev
+
 ## Mit virtuellen Environments arbeiten
 
 Sobald eine Anwendung Abhängigkeiten benötigt ist es jedenfalls sinnvoll, in einem eigenen Environment zu arbeiten.
