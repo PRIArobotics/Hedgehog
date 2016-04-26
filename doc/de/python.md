@@ -16,7 +16,7 @@ Mit den folgenden Befehlen werden `pip` und `virtualenv` für Python 3 installie
 Damit können für beide Python-Versionen Environments erstellt werden.
 
     sudo apt-get -y install python3-pip
-    pip3 install virtualenv
+    sudo pip3 install virtualenv
 
 Für die Installation mancher Module sind außerdem die Header-Definitionen von Python notwendig.
 Diese werden folgendermaßen für beide Versionen installiert:
@@ -59,7 +59,8 @@ Dasselbe für Python 2:
 
 ## Versionenvergleich
 
-Zum Schluss ein Vergleich der verschiedenen Versionen.
+Zum Schluss ein Vergleich der verschiedenen Versionen. (Stand: 26.04.2016)
+
 Global sind `python`, `python3`, `pip3` und `virtualenv` installiert.
 
     which python; python --version
@@ -67,12 +68,12 @@ Global sind `python`, `python3`, `pip3` und `virtualenv` installiert.
     # Python 2.7.9
     which python3; python3 --version
     # /usr/bin/python3
-    # Python 3.4.3
+    # Python 3.4.2
     which pip3; pip3 --version
     # /usr/bin/pip3
     # pip 1.5.6 from /usr/lib/python3/dist-packages (python 3.4)
     python3 -m virtualenv --version
-    # 13.1.2
+    # 15.0.1
 
 In einem Environment für Python 3 zeigen `python` und `pip` auf das Environment, und arbeiten mit Python 3.
 Man beachte außerdem, dass die `pip`-Version neuer ist als die, die global installiert ist:
@@ -81,11 +82,11 @@ Die Ubuntu-Repositories sind nicht auf dem neuesten Stand.
     python3 -m virtualenv env
     . env/bin/activate
     which python; python --version
-    # /home/orangepi/env/bin/python
-    # Python 3.4.3
+    # /home/hedgehog/env/bin/python
+    # Python 3.4.2
     which pip; pip --version
-    # /home/orangepi/env/bin/pip
-    # pip 7.1.2 from /home/orangepi/env/lib/python3.4/site-packages (python 3.4)
+    # /home/hedgehog/env/bin/pip
+    # pip 8.1.1 from /home/hedgehog/env/lib/python3.4/site-packages (python 3.4)
     deactivate
     rm -rf env
 
@@ -97,8 +98,8 @@ Analoges gilt für ein Environment für Python 2.
     # /home/orangepi/env/bin/python
     # Python 2.7.9
     which pip; pip --version
-    # /home/orangepi/env/bin/pip
-    # pip 7.1.2 from /home/orangepi/env/local/lib/python2.7/site-packages (python 2.7)
+    # /home/hedgehog/env/bin/pip
+    # pip 8.1.1 from /home/hedgehog/env/local/lib/python2.7/site-packages (python 2.7)
     deactivate
     rm -rf env
 
