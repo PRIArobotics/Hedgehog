@@ -56,7 +56,7 @@ Die folgenden Aufgaben werden durch das Skript erledigt:
   Weiters konfigurieren wir alle UARTs für Mode 2 ohne `CTS`/`RTS`.
 
   Das neue `script.bin` wird direkt auf dem Pi aus `res/orangepi2.fex` erstellt, es können also vor Ausführung des Skripts noch Anpassungen vorgenommen werden.
-  Das Originale Skript, auf dem das von uns bereitgestellte basiert, ist [hier](https://github.com/igorpecovnik/lib/blob/master/config/orangepi2.fex) verfügbar.
+  Das Originale Skript, auf dem das von uns bereitgestellte basiert, ist [hier](https://github.com/igorpecovnik/lib/blob/master/config/fex/orangepi2.fex) verfügbar.
 
 * Kernelmodul `gpio-sunxi` in `/etc/modules` aktivieren
 
