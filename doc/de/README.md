@@ -8,6 +8,6 @@ Dieses Repository enthält eine abgeänderte Version von `orangepi2.fex` von [hi
 2. [Arbeiten mit dem Orange Pi](01-Working.md)
 
 * [Python auf dem Orange Pi](python.md)
-* [STM32-Entwicklung](stm32development.md)
+* [HWC-Entwicklung](hwc.md)
 * **TODO**
 
