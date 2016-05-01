@@ -40,10 +40,9 @@ Im folgenden wird davon ausgegangen, dass die Setup-Dateien auf der Karte unter 
 Das Setup-Skript wird folgendermaßen mit Root-Rechten ausgeführt:
 
     cd /home/hedgehog/HedgehogLightSetup
-    chmod a+x setup.sh
-    sudo ./setup.sh
+    sudo make setup
 
-Die folgenden Aufgaben werden durch das Skript erledigt:
+Die folgenden Aufgaben werden durch das Setup erledigt:
 
 * Software aktualisieren
 
@@ -110,11 +109,4 @@ Um die aktuell ausgewählte, oder eine bestimmte, Locale zu aktivieren, kann man
     sudo ./fixlocale.sh
     # bestimmte Locale (hier: aktuelle Locale)
     sudo ./fixlocale.sh "$LC_NAME"
-
-## Aufräumen
-
-Die Setup-Dateien können abschließend vom Pi gelöscht werden.
-
-    cd /home/hedgehog
-    rm -rf HedgehogLightSetup
 

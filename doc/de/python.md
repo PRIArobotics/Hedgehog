@@ -23,6 +23,11 @@ Diese werden folgendermaßen für beide Versionen installiert:
 
     sudo apt-get -y install python-dev python3-dev
 
+Diese Schritte können mit dem Setup-Makefile vereinfacht werden:
+
+    cd /home/hedgehog/HedgehogLightSetup
+    sudo make python-setup
+
 ## Mit virtuellen Environments arbeiten
 
 Sobald eine Anwendung Abhängigkeiten benötigt ist es jedenfalls sinnvoll, in einem eigenen Environment zu arbeiten.
