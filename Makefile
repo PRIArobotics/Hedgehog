@@ -1,6 +1,31 @@
 .PHONY: setup fixlocale python-setup server-setup firmware-setup
 
-setup:
+setup-raspberrypi-phase1:
+	test "`id -u`" = "0" || (\
+	    echo "ERROR: Script must be run as root!" &&\
+	    exit 1)
+
+	raspi-config nonint do_expand_rootfs
+	raspi-config nonint do_serial 1
+
+	@echo "SYSTEM WILL NOW REBOOT"
+	reboot
+
+setup-raspberrypi-phase2:
+	test "`id -u`" = "0" || (\
+	    echo "ERROR: Script must be run as root!" &&\
+	    exit 1)
+
+	@echo "Install system updates..."
+	apt-get update || (\
+	    echo "ERROR: apt-get update failed! Are you root & connected to the Internet?" &&\
+	    exit 1)
+	apt-get -y upgrade || (\
+	    echo "ERROR: apt-get update failed! Are you root & connected to the Internet?" &&\
+	    exit 1)
+
+
+setup-orangepi:
 	test "`id -u`" = "0" || (\
 	    echo "ERROR: Script must be run as root!" &&\
 	    exit 1)
