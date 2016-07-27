@@ -1,28 +1,36 @@
-.PHONY: setup fixlocale python-setup server-setup firmware-setup
+.PHONY: system-setup fix_locale expand_root_fs enable_serial system_upgrade \
+		setup-orangepi python-setup server-setup firmware-setup
 
-setup-raspberrypi-phase1:
-	test "`id -u`" = "0" || (\
-	    echo "ERROR: Script must be run as root!" &&\
-	    exit 1)
+system-setup: fix_locale expand_root_fs enable_serial system_upgrade
+	sudo aptitude -y install git
 
-	raspi-config nonint do_expand_rootfs
-	raspi-config nonint do_serial 1
 
-	@echo "SYSTEM WILL NOW REBOOT"
-	reboot
+define fix_locale
+    @if [ "x" != "x$(1)" ]; then \
+        sum="`md5sum /etc/locale.gen`"; \
+        sudo sed -i -re 's/^# *($(1).*)$$/\1/' /etc/locale.gen; \
+        if [ "$$sum" = "`md5sum /etc/locale.gen`" ]; then \
+            echo "no changes were made! $(1) is not a valid locale or already enabled"; \
+        else \
+            sudo locale-gen; \
+        fi \
+    fi
+endef
 
-setup-raspberrypi-phase2:
-	test "`id -u`" = "0" || (\
-	    echo "ERROR: Script must be run as root!" &&\
-	    exit 1)
+fix_locale:
+	$(call fix_locale,$(LC_NAME))
 
-	@echo "Install system updates..."
-	apt-get update || (\
-	    echo "ERROR: apt-get update failed! Are you root & connected to the Internet?" &&\
-	    exit 1)
-	apt-get -y upgrade || (\
-	    echo "ERROR: apt-get update failed! Are you root & connected to the Internet?" &&\
-	    exit 1)
+expand_root_fs:
+	sudo raspi-config nonint do_expand_rootfs
+	sudo partprobe
+
+enable_serial:
+	sudo raspi-config nonint do_serial 1
+	sudo sed -i -re 's/^ *enable_uart *= *0 *$$/enable_uart=1/' /boot/config.txt
+
+system_upgrade:
+	sudo aptitude -y update
+	sudo aptitude -y upgrade
 
 
 setup-orangepi:
@@ -70,20 +78,10 @@ setup-orangepi:
 	@echo "SYSTEM WILL NOW REBOOT"
 	reboot
 
-fixlocale:
-	test "`id -u`" = "0" || (\
-	    echo "ERROR: Script must be run as root!" &&\
-	    exit 1)
-
-	./fixlocale.sh
 
 python-setup:
-	test "`id -u`" = "0" || (\
-	    echo "ERROR: Script must be run as root!" &&\
-	    exit 1)
-
-	apt-get -y install python3-pip python-dev python3-dev
-	pip3 install virtualenv
+	sudo aptitude -y install python3-pip python-dev python3-dev
+	sudo pip3 install virtualenv
 
 server-setup:
 	git clone https://github.com/PRIArobotics/HedgehogServerBundle.git ../HedgehogServerBundle
