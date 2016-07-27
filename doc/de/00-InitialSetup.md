@@ -1,112 +1,112 @@
-# Vorbereiten eines Orange Pi
+# Vorbereiten eines Raspberry Pi
 
 Dieses Dokument soll beschreiben, wie man eine MicroSD-Karte für die Verwendung für Hedgehog Light vorbereitet.
 
 ## Originales Image auf SD-Karte spielen
 
-Wir verwenden Armbian für den Orange Pi 2.
-[Hier](http://www.armbian.com/orange-pi-2/) gibt es Download-Links für die
-[Server](http://mirror.igorpecovnik.com/Armbian_5.05_Orangepih3_Debian_jessie_3.4.110.zip)- sowie
-[Desktop](http://mirror.igorpecovnik.com/Armbian_5.05_Orangepih3_Debian_jessie_3.4.110_desktop.zip)-Vesion.
+Wir verwenden Raspbian für den Raspberry Pi 3.
+[Hier](https://www.raspberrypi.org/downloads/raspbian/) gibt es Download-Links für die Server- sowie Desktop-Vesion.
+Raspbian kann auch über BitTorrent heruntergeladen werden.
 
-Die Installation funktioniert wie auch bei einem Raspberry Pi, Anleitungen gibt es [hier](https://www.raspberrypi.org/documentation/installation/installing-images/README.md).
-Nach dem Download und entpacken wird es mit geeigneter Software auf eine MicroSD-Karte gespielt.
+Installationsanleitungen gibt es [hier](https://www.raspberrypi.org/documentation/installation/installing-images/README.md).
 
-## Armbian zum ersten mal starten
+## Verbindung herstellen
 
 Details zur Verwendung des Pi (Ethernet, UART-Konsole, SSH) finden sich im [nächsten Dokument](01-Working.md).
 Die dortigen Anweisungen sind auch hier gültig.
 
-Nach dem ersten Login (Username: `root`, Passwort: `1234`) muss das Root-Passwort geändert und ein zweiter Benutzer ertellt werden.
-Folge dazu den Anweisungen am Bildschirm.
-
-Wir gehen in weiterer Folge davon aus, dass der neue Benutzer `hedgehog` genannt wurde
-und sein Home-Verzeichnis `/home/hedgehog` ist.
-Für Entwicklungsgeräte empfehlen wir `hedgehog`/`hedgehog` als Login-Daten.
-
-Logge dich am besten Sofort aus dem Root-Accout aus (`^D`, `exit` oder `logout`) und benutze `hedgehog` für alle weiteren Schritte.
-
 ## Setup-Dateien bereitstellen
 
-Am einfachsten klont man dieses git-Repository direkt nach `/home/hedgehog`:
+Am einfachsten lädt man das benötigte Makefile direkt auf den Pi herunter:
 
-    git clone https://github.com/PRIArobotics/HedgehogLightSetup.git
+    cd
+    curl -O https://raw.githubusercontent.com/PRIArobotics/HedgehogLightSetup/master/Makefile
+    # oder: wget https://raw.githubusercontent.com/PRIArobotics/HedgehogLightSetup/master/Makefile
 
-Alternativ kann man das Repository [als zip-Datei herunterladen](https://github.com/PRIArobotics/HedgehogLightSetup/archive/master.zip) und auf die SD-Karte entpacken.
+Alternativ kann man das Makefile vor dem ersten Starten auf die SD-Karte (nach `/home/pi`) laden.
 
 ## Setup ausführen
 
-Im folgenden wird davon ausgegangen, dass die Setup-Dateien auf der Karte unter `/home/hedgehog/HedgehogLightSetup` liegen.
-Das Setup-Skript wird folgendermaßen mit Root-Rechten ausgeführt:
+Das Setup-Skript wird folgendermaßen ausgeführt:
 
-    cd /home/hedgehog/HedgehogLightSetup
-    sudo make setup
+    cd
+    make system-setup
 
 Die folgenden Aufgaben werden durch das Setup erledigt:
 
+* Locale einrichten
+
+  Die einzige standardmäßig aktivierte Locale ist `en_US.UTF-8`.
+  Wenn man sich per SSH mit dem Controller verbindet, wird aber die Locale des sich verbindenden Systems übernommen, z.B. `de_AT.UTF-8`.
+  Die dann aktive Locale ist also im System nicht aktiviert!
+  Das kann bei manchen Programmen zu Problemen führen, von Warnungen bishin zur fehlerhaften Ausführung.
+
+  Um Fehler und Warnungen im nachfolgenden Setup zu vermeiden, wird direkt die aktuelle Locale eingerichtet.
+  Verbindet man sich später über einen anderen Rechner, kann man mit `make fix_locale` diesen Schritt für die möglicherweise andere Locale wiederholen.
+
+* Partition erweitern
+
+  Bevor zusätzliche Software installiert wird, wird die Root-Partition an die Laufwerksgröße angepasst.
+
+* Serielle Verbindung aktiviert
+
+  Die Serielle Verbindung (UART) wird zur Kommunikation mit der Hardware-Platine benutzt.
+  Sie ist in Raspbian nach der Neuinstallation noch nicht aktiviert.
+
 * Software aktualisieren
 
-  Es werden die Paketquellen aktualisiert sowie Updates installiert:
+  Es werden die Paketquellen aktualisiert sowie Updates installiert
 
-* `/boot/bin/orangepi2.bin` ersetzen
+* `git` installieren
 
-  Das Original konfiguriert einige Pins nicht so, wie wir es benötigen, wodurch UARTs und GPIOs nicht gleichzeitig funktionieren.
-  Außerdem ist UART1 standardmäßig nicht aktiviert.
-  Weiters konfigurieren wir alle UARTs für Mode 2 ohne `CTS`/`RTS`.
-
-  Das neue `script.bin` wird direkt auf dem Pi aus `res/orangepi2.fex` erstellt, es können also vor Ausführung des Skripts noch Anpassungen vorgenommen werden.
-  Das Originale Skript, auf dem das von uns bereitgestellte basiert, ist [hier](https://github.com/igorpecovnik/lib/blob/master/config/fex/orangepi2.fex) verfügbar.
-
-* Kernelmodul `gpio-sunxi` in `/etc/modules` aktivieren
-
-  Dadurch werden die GPIOs über das `sysfs` verfügbar.
-
-* Dem `hedgehog`-User Zugriff auf IOs geben
-
-  Der User mit der Kennung 1000 wird der Gruppe `gpio` hinzugefügt.
-  Sofern diese Anleitung befolgt wurde, ist das der Benutzer, der nach der Installation erstellt wurde (der Benutzername ist egal).
-  Durch ein Startup-Script wird den notwendigen Dateien diese Gruppe zugewiesen.
-
-  Der User ist schon von vornherein Teil der `dialout`-Gruppe, wodurch er Zugriff auf die USARTs hat.
+  Außer dem Setup-Makefile wird Hedgehog-Software über `git` heruntergeladen, daher wird dieses Tool installiert.
 
   **TODO** Zugriff auf andere IOs (SPI, …) ohne Root-Rechte ermöglichen/testen
 
-* `network-manager` installieren
-
-  Mit dem Network Manager können Netzwerkverbindungen einfach verwaltet werden.
-  
-  __Falls die Verbindung über SSH hergestellt wurde, wird sie während diesem Schritt abbrechen!__
-
-* Ein Neustart: `reboot`
-
 ## (optional) Drahtlosnetzwerk einrichten
 
-Durch das Setup wurde unter anderem `network-manager` installiert.
-Damit können sowohl über die Konsole, als auch über eine grafische Oberfläche
-(falls vorhanden), Netzwerke konfiguriert werden.
+Auf dem Raspberry Pi ist WPA supplicant installiert.
+Damit kann eine WLAN-Verbindung hergestellt werden, auch über die command line.
 
-Die folgenden Befehle helfen beim Verbinden mit einem Drahtlosnetzwerk:
+So wird zum Beispiel eine Verbindung mit dem TGM-Netzwerk (WPA Enterprise) hergestellt:
 
-    # Erklärt nmcli WIFI-Kommandos
-    nmcli device wifi help
-    # Listet Netzwerke auf
-    nmcli device wifi list
-    # Stellt eine Verbindung her. Siehe auch `nmcli device wifi help`
-    nmcli device wifi connect SSID password PASSWORD
+    sudo wpa_cli
+    > add_network
+    0
+    > set_network 0 ssid "TGM1x"
+    OK
+    > set_network 0 key_mgmt WPA-EAP
+    OK
+    > set_network 0 eap PEAP
+    OK
+    > set_network 0 identity "username"
+    OK
+    > set_network 0 password "password"
+    OK
+    > enable_network 0
+    OK
+    ...
+    > save_config
+    OK
 
-## (optional) Locale einrichten
+Eine Verbindung mit einem WPA Personal Netzwerk wird folgendermaßen hergestellt:
 
-Die einzige standardmäßig aktivierte Locale ist `en_US.UTF-8`.
-Wenn man sich per SSH mit dem Controller verbindet, wird aber die Locale des sich verbindenden Systems übernommen, z.B. `de_DE.UTF-8`.
-Die dann aktive Locale ist also im System nicht aktiviert!
-Das kann bei manchen Programmen zu Problemen führen, von Warnungen bishin zu fehlerhaften Ausführungen.
+    sudo wpa_cli
+    > add_network
+    1
+    > set_network 1 ssid "SSID"
+    OK
+    > set_network 1 key_mgmt WPA-PSK
+    OK
+    > set_network 1 psk "secret"
+    OK
+    > enable_network 1
+    OK
+    ...
+    > save_config
+    OK
 
-Um die aktuell ausgewählte, oder eine bestimmte, Locale zu aktivieren, kann man folgenden Befehl nutzen:
+Mehr Informationen zu `wpa_cli` und den möglichen `set_network`-Optionen erhält man über
 
-    cd /home/hedgehog/HedgehogLightSetup
-    chmod a+x setup.sh
-    # aktuelle Locale
-    sudo ./fixlocale.sh
-    # bestimmte Locale (hier: aktuelle Locale)
-    sudo ./fixlocale.sh "$LC_NAME"
-
+    man wpa_cli
+    man wpa_supplicant.conf

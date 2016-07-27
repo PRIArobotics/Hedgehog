@@ -1,10 +1,16 @@
-# Arbeiten mit dem Orange Pi
+# Arbeiten mit dem Raspberry Pi
 
-Dieses Dokument soll beschreiben, wie man einen vorbereiteten Orange Pi in Betrieb nimmt.
+Dieses Dokument soll beschreiben, wie man einen vorbereiteten Raspberry Pi in Betrieb nimmt.
 
-Die Stromversorgung erfolgt über das mitgelieferte Kabel von einem USB-Anschluss aus.
-Zusätzlich braucht man noch Eingabe- und Ausgabemöglichkeiten.
-Benutzername und Passwort lauten (standardmäßig) `hedgehog`.
+Die Stromversorgung eines Hedgehogs erfolgt über den Stromanschluss mit einem LiPo-Akku oder ein Netzteil
+(7.4V).
+
+Ein Raspberry Pi ohne Hardware-Platine kann über den MicroUSB-Anschluss mit Strom versorgt werden.
+
+> **Achtung:** Ein Raspberry Pi mit Hardware-Platine kann **nicht** über MicroUSB mit Strom versorgt werden.
+
+Zusätzlich braucht man noch Eingabe- und Ausgabemöglichkeiten;
+Benutzername und Passwort lauten (standardmäßig) `pi`/`raspberry`.
 
 ## Direkt
 
@@ -30,7 +36,7 @@ Falls der Pi schon länger läuft, wird man keinen Prompt sehen; einmal Enter od
 
 ## Über SSH
 
-Der Orange Pi ist konfiguriert, über seinen Ethernet-Port per DHCP eine Adresse zu beziehen, also kann man sich über Ethernet mit dem Pi verbinden und auch Internet für ihn freigeben.
+Der Raspberry Pi ist konfiguriert, über seinen Ethernet-Port per DHCP eine Adresse zu beziehen, also kann man sich über Ethernet mit dem Pi verbinden und auch Internet für ihn freigeben.
 Danach benötigt man noch die IP-Adresse des Pi, und verbindet sich über SSH.
 
 ### Ethernet-Freigabe
@@ -59,7 +65,7 @@ Wenn man selbst die Verbindung freigibt (über Ethernet oder WIFI), kann man die
 
 Zuerst die eigene IP-Adresse ermitteln, z.B. (ggf. muss man das Interface ändern):
 
-    ifconfig eth0 | \
+    ifconfig enp9s0 | \
       grep -oE 'inet addr:[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | \
       sed 's/inet addr://'
 
@@ -74,7 +80,7 @@ Neben der eigenen Adresse sollte auch die des Pi dabei sein.
 
 Insgesamt also:
 
-    SUBNET=`ifconfig eth0 | \
+    SUBNET=`ifconfig enp9s0 | \
       grep -oE 'inet addr:[0-9]+\.[0-9]+\.[0-9]+' | \
       sed 's/inet addr://'`
     for IP in $SUBNET.{1..254}; do ping -c 1 $IP & done | \
@@ -85,13 +91,13 @@ Insgesamt also:
 
 ### Per SSH verbinden
 
-Abschließend verbindet man sich per SSH mit dem Orange Pi.
+Abschließend verbindet man sich per SSH mit dem Raspberry Pi.
 
 #### Linux/Mac
 
-Wenn die IP-Adresse zum Beispiel `10.42.0.115` ist:
+Wenn die IP-Adresse zum Beispiel `10.42.0.232` ist:
 
-    ssh hedgehog@10.42.0.115
+    ssh pi@10.42.0.232
 
 #### Windows: TODO
 
