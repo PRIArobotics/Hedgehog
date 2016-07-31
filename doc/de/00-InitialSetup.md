@@ -63,6 +63,8 @@ Die folgenden Aufgaben werden durch das Setup erledigt:
 
   **TODO** Zugriff auf andere IOs (SPI, …) ohne Root-Rechte ermöglichen/testen
 
+Anschließend muss der Raspberry Pi neu gestartet werden, um die Aktivierung der UART-Schnittstelle anzuweden.
+
 ## (optional) Drahtlosnetzwerk einrichten
 
 Auf dem Raspberry Pi ist WPA supplicant installiert.

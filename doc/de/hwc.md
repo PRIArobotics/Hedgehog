@@ -1,21 +1,22 @@
 # HWC-Entwicklung
 
-Dieses Dokument soll beschreiben, wie direkt auf dem Orange Pi Software für den verbundenen STM32-Microcontroller Software entwickelt werden kann.
-Unten wird weiters beschrieben, wie mit einer anderen Entwicklungsmaschine Programme über den Orange Pi auf den Microcontroller geladen werden können.
+Dieses Dokument soll beschreiben, wie direkt auf dem Raspberry Pi Software für den STM32-Microcontroller auf der Hardware-Platine Software entwickelt werden kann.
+Unten wird weiters beschrieben, wie mit einer anderen Entwicklungsmaschine Programme über den Raspberry Pi auf den Microcontroller geladen werden können.
 
 Die folgende Installation der Toolchain und des Bundles können mit dem Setup-Makefile vereinfacht werden:
 
-    cd /home/hedgehog/HedgehogLightSetup
-    sudo make firmware-setup
+    cd
+    make firmware-setup
 
 ## C-Toolchain
 
 Zum Kompilieren und Linken von C-Programmen für den Controller benötigt man die entsprechende Toolchain.
-Die Toolchain kann auf dem Orange Pi, oder auf einem anderen Debian-basierten System, wie folgt installiert werden:
+Die Toolchain kann auf dem Raspberry Pi, oder auf einem anderen Debian-basierten System, wie folgt installiert werden:
 
     sudo apt-get -y install gcc-arm-none-eabi
-    # Auf ARM-Systemen wie dem Orange Pi scheint man auch dieses Paket zu benötigen,
-    # siehe https://stackoverflow.com/questions/23973971/no-stdint-h-file-on-debian:
+    # Auf ARMbian für Orange Pi scheint eine Abhängigkeit zu fehlen.
+    # Auf Raspbian ist dieser Befehl nicht notwendigkeit.
+    # siehe auch https://stackoverflow.com/questions/23973971/no-stdint-h-file-on-debian:
     sudo apt-get -y install libnewlib-arm-none-eabi
 
 ## Hedgehog Firmware Bundle

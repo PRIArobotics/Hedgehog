@@ -1,6 +1,6 @@
 # Python auf dem Orange Pi
 
-Dieses Dokument soll beschreiben, wie der Orange Pi für das Arbeiten mit Python vorbereitet werden kann.
+Dieses Dokument soll beschreiben, wie der Raspberry Pi für das Arbeiten mit Python vorbereitet werden kann.
 
 Python gibt es in den Versionen 2 und 3, die teilweise nicht kompatibel sind.
 Es gibt Möglichkeiten, Bibliotheken für Python 2 und 3 zu schreiben, jedoch gibt es auch solche, die nur eine Version unterstützen.
@@ -11,7 +11,7 @@ Auf Details wird in diesem Dokument nicht eingegangen; es wird lediglich gezeigt
 
 ## Benötigte Software
 
-Python 2 & 3 sind am Orange Pi schon vorinstalliert, `pip` allerdings nicht.
+Python 2 & 3 sind am Raspberry Pi schon vorinstalliert, `pip` allerdings nicht.
 Mit den folgenden Befehlen werden `pip` und `virtualenv` für Python 3 installiert.
 Damit können für beide Python-Versionen Environments erstellt werden.
 
@@ -25,8 +25,8 @@ Diese werden folgendermaßen für beide Versionen installiert:
 
 Diese Schritte können mit dem Setup-Makefile vereinfacht werden:
 
-    cd /home/hedgehog/HedgehogLightSetup
-    sudo make python-setup
+    cd
+    make python-setup
 
 ## Mit virtuellen Environments arbeiten
 
@@ -47,9 +47,9 @@ Wobei `env` durch einen beliebigen Ordnernamen ersetzt werden kann; `env` ist je
 Solange ein Environment aktiviert ist, wird dem Prompt der Name vorgestellt, etwa:
 
     ...
-    orangepi@OrangePI:~$ . env/bin/activate
-    (env)orangepi@OrangePI:~$ deactivate
-    orangepi@OrangePI:~$
+    pi@raspberrypi:~$ . env/bin/activate
+    (env)pi@raspberrypi:~$ deactivate
+    pi@raspberrypi:~$
     ...
 
 Dasselbe für Python 2:
