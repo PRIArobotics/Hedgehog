@@ -64,6 +64,22 @@ Die folgenden Aufgaben werden durch das Setup erledigt:
   **TODO** Zugriff auf andere IOs (SPI, …) ohne Root-Rechte ermöglichen/testen
 
 Anschließend muss der Raspberry Pi neu gestartet werden, um die Aktivierung der UART-Schnittstelle anzuweden.
+Natürlich kann davor ein Drahtlosnetzwerk konfiguriert werden, damit man dieses in weiterer Folge verwenden kann.
+
+## Hedgehog Software installieren
+
+Die Hedgehog-Software wird als zwei "bundles" bereitgestellt -
+git-Repositories, die neben Setup-Dateien die eigentliche Software als Submodule enthalten.
+Das [`HedgehogServerBundle`](https://github.com/PRIArobotics/HedgehogServerBundle) enthält die Software für den Raspberry Pi,
+das [`HedgehogFirmwareBundle`](https://github.com/PRIArobotics/HedgehogFirmwareBundle) enthält die Mikrocontroller-Software sowie Entwicklungstools dafür.
+
+Die bundles werden folgendermaßen installiert:
+
+    cd
+    make server-setup
+    make firmware-setup
+
+Informationen zur Verwendung der bundles können den READMEs und Makefiles entnommen werden.
 
 ## (optional) Drahtlosnetzwerk einrichten
 

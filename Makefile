@@ -43,7 +43,8 @@ server-setup:
 	    git submodule init && \
 	    git submodule update && \
 	    make env && \
-	    make protoc
+	    make protoc && \
+	    make install
 
 firmware-setup:
 	sudo apt-get -y install gcc-arm-none-eabi libnewlib-arm-none-eabi
