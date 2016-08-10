@@ -61,6 +61,7 @@ python-setup:
 server-setup:
 	git clone https://github.com/PRIArobotics/HedgehogServerBundle.git
 	cd HedgehogServerBundle && \
+	    git checkout master && \
 	    git submodule init && \
 	    git submodule update && \
 	    make env && \
@@ -71,6 +72,7 @@ firmware-setup:
 	sudo apt-get -y install gcc-arm-none-eabi libnewlib-arm-none-eabi
 	git clone https://github.com/PRIArobotics/HedgehogFirmwareBundle.git
 	cd HedgehogFirmwareBundle && \
+	    git checkout master && \
 	    git submodule init && \
 	    git submodule update && \
 	    make env
