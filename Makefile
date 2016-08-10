@@ -1,8 +1,12 @@
 .PHONY: system-setup fix_locale expand_root_fs enable_serial system_upgrade \
 		python-setup server-setup firmware-setup
 
-system-setup: fix_locale expand_root_fs enable_serial system_upgrade
+rpi-setup: fix_locale expand_root_fs enable_serial system_upgrade
 	sudo aptitude -y install git
+
+opi-setup: fix_locale replace_fex enable_gpio system_upgrade
+	@echo "SYSTEM WILL NOW REBOOT"
+	sudo reboot
 
 
 define fix_locale
@@ -29,8 +33,25 @@ enable_serial:
 	sudo sed -i -re 's/^ *enable_uart *= *0 *$$/enable_uart=1/' /boot/config.txt
 
 system_upgrade:
-	sudo aptitude -y update
+	sudo apt-get -y update
+	sudo apt-get -y install aptitude
 	sudo aptitude -y upgrade
+
+replace_fex:
+	sudo mv /boot/bin/orangepi2.bin /boot/bin/orangepi2.bin.orig
+	curl https://raw.githubusercontent.com/PRIArobotics/HedgehogLightSetup/master/res/orangepi2.fex | \
+	    fex2bin | sudo tee /boot/bin/orangepi2.bin > /dev/null
+
+enable_gpio:
+	sudo sed -i -re 's/^#+(gpio[-_]sunxi)$$/\1/' /etc/modules
+
+	sudo groupadd -f gpio
+	sudo usermod -a -G gpio `id -nu 1000`
+
+	curl https://raw.githubusercontent.com/PRIArobotics/HedgehogLightSetup/master/res/gpio-permissions | \
+	    sudo tee /etc/init.d/gpio-permissions > /dev/null
+	sudo chmod +x /etc/init.d/gpio-permissions
+	sudo update-rc.d gpio-permissions defaults
 
 
 python-setup:

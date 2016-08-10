@@ -12,6 +12,10 @@ Ein Raspberry Pi ohne Hardware-Platine kann über den MicroUSB-Anschluss mit Str
 Zusätzlich braucht man noch Eingabe- und Ausgabemöglichkeiten;
 Benutzername und Passwort lauten (standardmäßig) `pi`/`raspberry`.
 
+> Beim Orange Pi lauten die Daten `root`/`1234`.
+> Als erster Schritt wird dann das Root-Passwort geändert und ein zusützlicher Benutzer angelegt.
+> Wir empfehlen `pi`/`raspberry` oder `hedgehog`/`hedgehog`, wenn keine Zugangsbeschränkung benötigt wird.
+
 ## Direkt
 
 Maus, Tastatur (USB) & Bildschirm (HDMI) anstecken, an der grafischen Oberfläche anmelden.

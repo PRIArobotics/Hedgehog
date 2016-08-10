@@ -2,11 +2,20 @@
 
 Dieses Dokument soll beschreiben, wie man eine MicroSD-Karte für die Verwendung für Hedgehog Light vorbereitet.
 
+> Für den SHARK Unterwasser-Roboter unterstützen wir noch den Orange Pi 2.
+> Diese Anleitung geht nicht auf die Details des Orange Pi ein,
+> enthält aber die relevanten Unterschiede bei der Installation.
+
 ## Originales Image auf SD-Karte spielen
 
 Wir verwenden Raspbian für den Raspberry Pi 3.
 [Hier](https://www.raspberrypi.org/downloads/raspbian/) gibt es Download-Links für die Server- sowie Desktop-Vesion.
 Raspbian kann auch über BitTorrent heruntergeladen werden.
+
+> für den Orange Pi 2 wird Armbian benutzt.
+> [Hier](http://www.armbian.com/orange-pi-2/) gibt es Download-Links für die
+> [Server](http://mirror.igorpecovnik.com/Armbian_5.05_Orangepih3_Debian_jessie_3.4.110.zip)- sowie
+> [Desktop](http://mirror.igorpecovnik.com/Armbian_5.05_Orangepih3_Debian_jessie_3.4.110_desktop.zip)-Vesion.
 
 Installationsanleitungen gibt es [hier](https://www.raspberrypi.org/documentation/installation/installing-images/README.md).
 
@@ -30,7 +39,9 @@ Alternativ kann man das Makefile vor dem ersten Starten auf die SD-Karte (nach `
 Das Setup-Skript wird folgendermaßen ausgeführt:
 
     cd
-    make system-setup
+    make rpi-setup
+    # bzw. für Orange Pi (Legacy support für SHARK):
+    make opi-setup
 
 Die folgenden Aufgaben werden durch das Setup erledigt:
 
