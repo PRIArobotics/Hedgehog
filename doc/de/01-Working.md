@@ -51,7 +51,24 @@ _Network Connections_ > (geeignete Ethernet-Konfiguration) > _Edit_ > _IPv4 Sett
 
 #### Linux/Mac: TODO
 
-#### Windows: TODO
+#### Windows
+
+Eine Möglichkeit unter Windows ist, beiden Geräten eine statische IP-Adresse zu geben.
+Am Raspberry Pi editiert man dazu `cmdline.txt` in der Boot-Partition.
+Das ist eine FAT-Partition, diese wird also auch unter Windows erkannt.
+
+> Der Pi sollte davor schon einmal gestartet haben!
+
+Am Ende der Datei wird `ip=169.254.0.2` hinzugefügt.
+Die Datei sieht dann etwa so aus:
+
+    dwc_otg.lpm_enable=0 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait ip=169.254.0.2
+
+Dann wird unter Windows der Ethernet-Adapter konfiguriert:
+
+_Netzwerk- und Freigabecenter_ > _Adaptereinstellungen ändern_ > Ethernet > _Eigenschaften_ > _TCP/IPv4_ > _Alternative Konfiguration_
+
+Dort wird als IP-Adresse `169.254.0.1` und als Netzwerkmaske `255.255.255.0` ausgewählt.
 
 ### WIFI: TODO
 

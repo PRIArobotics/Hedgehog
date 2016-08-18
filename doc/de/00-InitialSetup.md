@@ -9,7 +9,8 @@ Dieses Dokument soll beschreiben, wie man eine MicroSD-Karte für die Verwendung
 ## Originales Image auf SD-Karte spielen
 
 Wir verwenden Raspbian für den Raspberry Pi 3.
-[Hier](https://www.raspberrypi.org/downloads/raspbian/) gibt es Download-Links für die Server- sowie Desktop-Vesion.
+[Hier](https://www.raspberrypi.org/downloads/raspbian/) gibt es Download-Links für die Lite- sowie Desktop-Version.
+Die Lite-Version hat keine grafische Benutzeroberfläche, was für eine normale des Hedgehogs auch nicht notwendig ist.
 Raspbian kann auch über BitTorrent heruntergeladen werden.
 
 > für den Orange Pi 2 wird Armbian benutzt.
@@ -83,10 +84,12 @@ Die Hedgehog-Software wird als zwei "bundles" bereitgestellt -
 git-Repositories, die neben Setup-Dateien die eigentliche Software als Submodule enthalten.
 Das [`HedgehogServerBundle`](https://github.com/PRIArobotics/HedgehogServerBundle) enthält die Software für den Raspberry Pi,
 das [`HedgehogFirmwareBundle`](https://github.com/PRIArobotics/HedgehogFirmwareBundle) enthält die Mikrocontroller-Software sowie Entwicklungstools dafür.
+Beide Bundles beinhalten Python-Software, die deshalb zunächst installiert wird.
 
 Die bundles werden folgendermaßen installiert:
 
     cd
+    make python-setup
     make server-setup
     make firmware-setup
 
