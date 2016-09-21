@@ -53,26 +53,24 @@ enable_gpio:
 	sudo chmod +x /etc/init.d/gpio-permissions
 	sudo update-rc.d gpio-permissions defaults
 
+get_bundle:
+	test -d HedgehogBundle || git clone https://github.com/PRIArobotics/HedgehogBundle.git
+
 
 python-setup:
 	sudo aptitude -y install python3-pip python-dev python3-dev
 	sudo pip3 install virtualenv
 
-server-setup:
-	git clone https://github.com/PRIArobotics/HedgehogServerBundle.git
-	cd HedgehogServerBundle && \
-	    git checkout master && \
-	    git submodule init && \
-	    git submodule update && \
-	    make env && \
-	    make protoc && \
-	    make install
+server-setup: get_bundle
+	cd HedgehogBundle/server && make setup install
 
-firmware-setup:
+server-develop-setup: get_bundle
+	cd HedgehogBundle/server && make setup-develop install
+
+firmware-setup: get_bundle
 	sudo apt-get -y install gcc-arm-none-eabi libnewlib-arm-none-eabi
-	git clone https://github.com/PRIArobotics/HedgehogFirmwareBundle.git
-	cd HedgehogFirmwareBundle && \
-	    git checkout master && \
-	    git submodule init && \
-	    git submodule update && \
-	    make env
+	cd HedgehogBundle/firmware && make setup all flash
+
+firmware-develop-setup: get_bundle
+	sudo apt-get -y install gcc-arm-none-eabi libnewlib-arm-none-eabi
+	cd HedgehogBundle/firmware && make setup-develop all flash
