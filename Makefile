@@ -2,7 +2,7 @@
 		python-setup server-setup firmware-setup
 
 rpi-setup: fix_locale expand_root_fs enable_serial system_upgrade
-	sudo aptitude -y install git
+	sudo aptitude -y install git usbmount
 
 opi-setup: fix_locale replace_fex enable_gpio system_upgrade
 	@echo "SYSTEM WILL NOW REBOOT"
