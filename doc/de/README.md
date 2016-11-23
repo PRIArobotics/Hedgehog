@@ -63,13 +63,13 @@ und darauf aufbauend eine blockierende API; beide Modelle sind für den Benutzer
 Weiters wird aktuell eine Web IDE entwickelt.
 Damit können Benutzer in ihrem Browser visuell oder textuell Programme schreiben und diese auf dem Controller ausführen.
 
-## Raspberry Pi Setup Scripts für Hedgehog Light
+## Verwendung
 
-Dieses Repository enthält Scripts und Dokumentation zur Vorbereitung eines Raspberry Pi mit Hedgehog Light.
+Mit den folgenden Anleitungen wir die Hedgehog Light Software installiert.
 
-1. [Vorbereiten eines Raspberry Pi](00-InitialSetup.md)
-2. [Arbeiten mit dem Raspberry Pi](01-Working.md)
+1. [Vorbereiten eines Raspberry Pi](Setup.md)
 
+* [Arbeiten mit dem Raspberry Pi](01-Working.md)
 * [Python auf dem Raspberry Pi](python.md)
 * [HWC-Entwicklung](hwc.md)
 * **TODO**

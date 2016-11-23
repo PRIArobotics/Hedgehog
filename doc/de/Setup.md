@@ -20,12 +20,14 @@ Raspbian kann auch über BitTorrent heruntergeladen werden.
 
 Installationsanleitungen gibt es [hier](https://www.raspberrypi.org/documentation/installation/installing-images/README.md).
 
-## Verbindung herstellen
+## Inbetriebnahme
 
 Details zur Verwendung des Pi (Ethernet, UART-Konsole, SSH) finden sich im [nächsten Dokument](01-Working.md).
 Die dortigen Anweisungen sind auch hier gültig.
 
-## Setup-Dateien bereitstellen
+Für die folgenden Setup-Schritte ist eine Internet-Verbindung notwendig.
+
+## Makefile bereitstellen
 
 Am einfachsten lädt man das benötigte Makefile direkt auf den Pi herunter:
 
@@ -33,7 +35,7 @@ Am einfachsten lädt man das benötigte Makefile direkt auf den Pi herunter:
     curl -O https://raw.githubusercontent.com/PRIArobotics/HedgehogLightSetup/master/Makefile
     # oder: wget https://raw.githubusercontent.com/PRIArobotics/HedgehogLightSetup/master/Makefile
 
-Alternativ kann man das Makefile vor dem ersten Starten auf die SD-Karte (nach `/home/pi`) laden.
+Alternativ kann man das [Makefile](https://raw.githubusercontent.com/PRIArobotics/HedgehogLightSetup/master/Makefile) vor dem ersten Starten auf die SD-Karte (nach `/home/pi`) laden.
 
 ## Setup ausführen
 
@@ -44,7 +46,23 @@ Das Setup-Skript wird folgendermaßen ausgeführt:
     # bzw. für Orange Pi (Legacy support für SHARK):
     make opi-setup
 
-Die folgenden Aufgaben werden durch das Setup erledigt:
+Anschließend muss der Raspberry Pi neu gestartet werden, um die Aktivierung der UART-Schnittstelle anzuweden.
+Die UART-Schnittstelle ist zum Installieren der HWC-Firmware notwendig.
+
+    sudo reboot
+
+Nach dem Neustart wird die eigentliche Hedgehog Light Software installiert:
+
+    cd
+    make python-setup server-setup firmware-setup
+
+**TODO** `with-raspberry`
+
+**TODO** Setups von Firmware-Installation trennen
+
+Die folgenden Schritte werden durch das Setup erledigt:
+
+### `rpi-setup`
 
 * Locale einrichten
 
@@ -75,25 +93,26 @@ Die folgenden Aufgaben werden durch das Setup erledigt:
 
   **TODO** Zugriff auf andere IOs (SPI, …) ohne Root-Rechte ermöglichen/testen
 
-Anschließend muss der Raspberry Pi neu gestartet werden, um die Aktivierung der UART-Schnittstelle anzuweden.
-Natürlich kann davor ein Drahtlosnetzwerk konfiguriert werden, damit man dieses in weiterer Folge verwenden kann.
+### `python-setup`
 
-## Hedgehog Software installieren
+Ein Großteil der Hedgehog Software basiert auf Python, das hiermit installiert wird.
 
-Die Hedgehog-Software wird als zwei "bundles" bereitgestellt -
-git-Repositories, die neben Setup-Dateien die eigentliche Software als Submodule enthalten.
-Das [`HedgehogServerBundle`](https://github.com/PRIArobotics/HedgehogServerBundle) enthält die Software für den Raspberry Pi,
-das [`HedgehogFirmwareBundle`](https://github.com/PRIArobotics/HedgehogFirmwareBundle) enthält die Mikrocontroller-Software sowie Entwicklungstools dafür.
-Beide Bundles beinhalten Python-Software, die deshalb zunächst installiert wird.
+### `server-setup`
 
-Die bundles werden folgendermaßen installiert:
+Hiermit wird der Hedgehog Server installiert.
+Dabei werden die benötigten Python-Pakete in einem Vitual Environment installiert.
+Statt `server-setup` kann auch `server-develop-setup` benutzt werden;
+damit wird eine noch nicht veröffentlichte Version installiert werden.
 
-    cd
-    make python-setup
-    make server-setup
-    make firmware-setup
+> **Achtung:** Die develop-Versionen sind generell weniger gut getestet als die offiziell veröffentlichten!
 
-Informationen zur Verwendung der bundles können den READMEs und Makefiles entnommen werden.
+### `firmware-setup`
+
+Hiermit wird die HWC Firmware installiert.
+Statt `firmware-setup` kann auch `firmware-develop-setup` benutzt werden;
+damit wird eine noch nicht veröffentlichte Version installiert werden.
+
+> **Achtung:** Die develop-Versionen sind generell weniger gut getestet als die offiziell veröffentlichten!
 
 ## (optional) Drahtlosnetzwerk einrichten
 
