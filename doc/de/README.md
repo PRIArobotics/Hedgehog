@@ -65,11 +65,8 @@ Damit können Benutzer in ihrem Browser visuell oder textuell Programme schreibe
 
 ## Verwendung
 
-Mit den folgenden Anleitungen wir die Hedgehog Light Software installiert.
-
-1. [Vorbereiten eines Raspberry Pi](Setup.md)
-
-* [Arbeiten mit dem Raspberry Pi](01-Working.md)
+* [Vorbereiten eines Raspberry Pi](Setup.md)
+* [Inbetriebnahme](Working.md)
 * [Python auf dem Raspberry Pi](python.md)
 * [HWC-Entwicklung](hwc.md)
 * **TODO**

@@ -22,7 +22,7 @@ Installationsanleitungen gibt es [hier](https://www.raspberrypi.org/documentatio
 
 ## Inbetriebnahme
 
-Details zur Verwendung des Pi (Ethernet, UART-Konsole, SSH) finden sich im [nächsten Dokument](01-Working.md).
+Details zur Verwendung des Pi (Ethernet, UART-Konsole, SSH) finden sich im [nächsten Dokument](Working.md).
 Die dortigen Anweisungen sind auch hier gültig.
 
 Für die folgenden Setup-Schritte ist eine Internet-Verbindung notwendig.

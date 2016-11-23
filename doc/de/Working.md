@@ -1,16 +1,15 @@
-# Arbeiten mit dem Raspberry Pi
+# Inbetriebnahme
 
-Dieses Dokument soll beschreiben, wie man einen vorbereiteten Raspberry Pi in Betrieb nimmt.
+Diese Anleitung zeigt, wie man sich auf dem im Hedgehog Light verbauten Raspberry Pi anmeldet.
+In den meisten Fällen ist das nicht notwendig, da über eine IDE bzw. das Hedgehog-Protokoll auf den Controller zugegriffen wird.
+Diese Anleitung ist für jene, die einen Hedgehog frisch installieren oder vollen Zugriff erlangen wollen.
 
-Die Stromversorgung eines Hedgehogs erfolgt über den Stromanschluss mit einem LiPo-Akku oder ein Netzteil
-(7.4V).
-
+Die Stromversorgung eines Hedgehogs erfolgt über den Stromanschluss mit einem LiPo-Akku oder ein Netzteil (7.4V).
 Ein Raspberry Pi ohne Hardware-Platine kann über den MicroUSB-Anschluss mit Strom versorgt werden.
 
 > **Achtung:** Ein Raspberry Pi mit Hardware-Platine kann **nicht** über MicroUSB mit Strom versorgt werden.
 
-Zusätzlich braucht man noch Eingabe- und Ausgabemöglichkeiten;
-Benutzername und Passwort lauten (standardmäßig) `pi`/`raspberry`.
+Zusätzlich braucht man noch Eingabe- und Ausgabemöglichkeiten; Benutzername und Passwort lauten (standardmäßig) `pi`/`raspberry`.
 
 > Beim Orange Pi lauten die Daten `root`/`1234`.
 > Als erster Schritt wird dann das Root-Passwort geändert und ein zusützlicher Benutzer angelegt.
@@ -18,36 +17,19 @@ Benutzername und Passwort lauten (standardmäßig) `pi`/`raspberry`.
 
 ## Direkt
 
-Maus, Tastatur (USB) & Bildschirm (HDMI) anstecken, an der grafischen Oberfläche anmelden.
-
-## Über USART
-
-Der USART0 befindet sich neben der Stromversorgung, nach Anschluss an einen geeigneten Adapter kann zum Beispiel über folgende Befehle kommuniziert werden.
-
-Falls der Pi schon länger läuft, wird man keinen Prompt sehen; einmal Enter oder ^C drücken, damit ein neuer ausgegeben wird.
-
-#### Linux/Mac
-
-    #picocom kann mit ^A^Q beendet werden
-    picocom -b 115200 /dev/ttyUSB0
-
-    #screen kann mit ^A^D beendet werden
-    screen /dev/ttyUSB0 115200
-
-#### Windows: TODO
-
-### Pinbelegung von USB2Serial-Adaptern im Labor: TODO
+Maus, Tastatur (USB) & Bildschirm (HDMI) anstecken, an der grafischen Oberfläche oder Konsole anmelden.
 
 ## Über SSH
 
-Der Raspberry Pi ist konfiguriert, über seinen Ethernet-Port per DHCP eine Adresse zu beziehen, also kann man sich über Ethernet mit dem Pi verbinden und auch Internet für ihn freigeben.
+Der Raspberry Pi ist konfiguriert, über seinen Ethernet-Port per DHCP eine Adresse zu beziehen,
+also kann man sich über Ethernet mit dem Pi verbinden und auch Internet für ihn freigeben.
 Danach benötigt man noch die IP-Adresse des Pi, und verbindet sich über SSH.
 
 ### Ethernet-Freigabe
 
 #### Ubuntu
 
-_Network Connections_ > (geeignete Ethernet-Konfiguration) > _Edit_ > _IPv4 Settings_ > _Method: Shared to other computers_
+*Network Connections* > (geeignete Ethernet-Konfiguration) > *Edit* > *IPv4 Settings* > *Method: Shared to other computers*
 
 #### Linux/Mac: TODO
 
@@ -66,7 +48,7 @@ Die Datei sieht dann etwa so aus:
 
 Dann wird unter Windows der Ethernet-Adapter konfiguriert:
 
-_Netzwerk- und Freigabecenter_ > _Adaptereinstellungen ändern_ > Ethernet > _Eigenschaften_ > _TCP/IPv4_ > _Alternative Konfiguration_
+*Netzwerk- und Freigabecenter* > *Adaptereinstellungen ändern* > Ethernet > *Eigenschaften* > *TCP/IPv4* > *Alternative Konfiguration*
 
 Dort wird als IP-Adresse `169.254.0.1` und als Netzwerkmaske `255.255.255.0` ausgewählt.
 
@@ -74,15 +56,19 @@ Dort wird als IP-Adresse `169.254.0.1` und als Netzwerkmaske `255.255.255.0` aus
 
 ### IP-Adresse ermitteln
 
-Wenn man auch anders mit dem Pi verbunden ist, kann man direkt nachschauen:
+Wenn man auch anders am Pi angemeldet ist, kann man direkt nachschauen:
 
     ifconfig eth0 | \
       grep -oE 'inet addr:[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | \
       sed 's/inet addr://'
 
+Wenn die Hedgehog-Software schon auf dem Pi installiert ist, kann man die IP-Adresse über die Discovery ermitteln.
+
 Wenn man selbst die Verbindung freigibt (über Ethernet oder WIFI), kann man die Adresse eventuell anders ermitteln, zum Beispiel:
 
 #### Linux/Mac
+
+> Ein Gesamtskript folgt am Ende dieses Abschnitts
 
 Zuerst die eigene IP-Adresse ermitteln, z.B. (ggf. muss man das Interface ändern):
 
