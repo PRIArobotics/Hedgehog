@@ -1,6 +1,8 @@
-# Vorbereiten eines Raspberry Pi
+# Hedgehog-Installation
 
-Dieses Dokument soll beschreiben, wie man eine MicroSD-Karte für die Verwendung für Hedgehog Light vorbereitet.
+Dieses Dokument soll beschreiben, wie ein Hedgehog installiert wird.
+Insbesondere wird gezeigt, wie Betriebsystem und Hedgehog-Software auf einer MicroSD-Karte,
+sowie die Hedgehog-Firmware auf dem HWC installiert werden.
 
 > Für den SHARK Unterwasser-Roboter unterstützen wir noch den Orange Pi 2.
 > Diese Anleitung geht nicht auf die Details des Orange Pi ein,
@@ -42,27 +44,37 @@ Alternativ kann man das [Makefile](https://raw.githubusercontent.com/PRIArobotic
 Das Setup-Skript wird folgendermaßen ausgeführt:
 
     cd
-    make rpi-setup
+    make setup-rpi
     # bzw. für Orange Pi (Legacy support für SHARK):
-    make opi-setup
+    make setup-opi
 
-Anschließend muss der Raspberry Pi neu gestartet werden, um die Aktivierung der UART-Schnittstelle anzuweden.
-Die UART-Schnittstelle ist zum Installieren der HWC-Firmware notwendig.
-
-    sudo reboot
-
-Nach dem Neustart wird die eigentliche Hedgehog Light Software installiert:
+Anschließend wird die eigentliche Hedgehog Light Software installiert:
 
     cd
-    make python-setup server-setup firmware-setup
+    make setup-hedgehog install-server
+    # oder - zur installation der Entwicklungs-Version
+    make setup-hedgehog-develop install-server
+
+Nun muss der Raspberry Pi neu gestartet werden, um die Aktivierung der UART-Schnittstelle anzuweden.
+Die UART-Schnittstelle ist zum Installieren der HWC-Firmware notwendig.
+
+Zu diesem Zeitpunkt ist das Setup für den Raspberry Pi abgeschlossen.
+Bei Bedarf kann zu diesem Zeitpunkt ein Abbild der SD-Karte gemacht werden, bzw. diese klonen.
+
+    sudo reboot
+    # oder - um vor dem Neustart ein Abbild erstellen zu können
+    sudo shutdown -h 0
+
+Nach dem Neustart wird noch die HWC-Firmware installiert:
+
+    cd
+    make install-firmware
 
 **TODO** `with-raspberry`
 
-**TODO** Setups von Firmware-Installation trennen
-
 Die folgenden Schritte werden durch das Setup erledigt:
 
-### `rpi-setup`
+### `setup-rpi`
 
 * Locale einrichten
 
@@ -93,26 +105,42 @@ Die folgenden Schritte werden durch das Setup erledigt:
 
   **TODO** Zugriff auf andere IOs (SPI, …) ohne Root-Rechte ermöglichen/testen
 
-### `python-setup`
+### `setup-opi`
 
-Ein Großteil der Hedgehog Software basiert auf Python, das hiermit installiert wird.
+> **TODO**
 
-### `server-setup`
+### `setup-hedgehog` / `setup-hedgehog-develop`
 
-Hiermit wird der Hedgehog Server installiert.
-Dabei werden die benötigten Python-Pakete in einem Vitual Environment installiert.
-Statt `server-setup` kann auch `server-develop-setup` benutzt werden;
-damit wird eine noch nicht veröffentlichte Version installiert werden.
+* Python einrichten
 
-> **Achtung:** Die develop-Versionen sind generell weniger gut getestet als die offiziell veröffentlichten!
+  Ein Großteil der Hedgehog Software basiert auf Python, das hiermit eingerichtet wird.
+  Insbesondere wird dadurch `pip` und `virtualenv` für Python 3 eingerichtet.
+  Mehr Informationen zur Python-Installation gibt es [**TODO** hier](python.md).
 
-### `firmware-setup`
+* Hedgehog Server Setup ausführen
 
-Hiermit wird die HWC Firmware installiert.
-Statt `firmware-setup` kann auch `firmware-develop-setup` benutzt werden;
-damit wird eine noch nicht veröffentlichte Version installiert werden.
+  Hiermit werden die benötigten Python-Pakete in einem Vitual Environment installiert.
+  Bei `setup-hedgehog-develop` wird eine noch nicht veröffentlichte Version benutzt.
 
-> **Achtung:** Die develop-Versionen sind generell weniger gut getestet als die offiziell veröffentlichten!
+  > **Achtung:** Die develop-Versionen sind generell weniger gut getestet als die offiziell veröffentlichten!
+
+* Hedgehog Firmware Setup ausführen
+
+  Hiermit wird die Toolchain für die HWC Firmware installiert und die Firmware kompiliert.
+  Bei `setup-hedgehog-develop` wird eine noch nicht veröffentlichte Version benutzt.
+
+  > **Achtung:** Die develop-Versionen sind generell weniger gut getestet als die offiziell veröffentlichten!
+
+### `install-server`
+
+Hiermit wird der Server so installiert, dass er beim Starten des Hedgehog automatisch mitgestartet wird.
+
+### `install-firmware`
+
+Damit wird die Firmware auf den HWC gespielt.
+Auf der SD-Karte wird dadurch keine Änderung durchgeführt;
+dieser Schritt ist also zwar Teil der Hedgehog-Installation,
+aber nicht zum erstellen eines vollständigen SD-Karten-Images.
 
 ## (optional) Drahtlosnetzwerk einrichten
 

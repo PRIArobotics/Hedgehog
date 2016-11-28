@@ -65,7 +65,7 @@ Damit können Benutzer in ihrem Browser visuell oder textuell Programme schreibe
 
 ## Verwendung
 
-* [Vorbereiten eines Raspberry Pi](Setup.md)
+* [Hedgehog-Installation](Setup.md)
 * [Inbetriebnahme](Working.md)
 * [Python auf dem Raspberry Pi](python.md)
 * [HWC-Entwicklung](hwc.md)

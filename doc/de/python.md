@@ -26,7 +26,7 @@ Diese werden folgendermaßen für beide Versionen installiert:
 Diese Schritte können mit dem Setup-Makefile vereinfacht werden:
 
     cd
-    make python-setup
+    make setup-python
 
 ## Mit virtuellen Environments arbeiten
 

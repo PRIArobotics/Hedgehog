@@ -1,15 +1,34 @@
-.PHONY: system-setup fix_locale expand_root_fs enable_serial system_upgrade \
-		python-setup server-setup firmware-setup
+.PHONY: setup-rpi setup-opi fix-locale system-upgrade \
+		_expand_root_fs _enable_serial _replace_fex _enable_gpio \
+		setup-hedgehog setup-hedgehog-develop setup-python \
+		setup-server setup-server-develop install-server uninstall-server \
+		setup-firmware setup-firmware-develop install-firmware \
+		_install_firmware_toolchain _clone_bundle _checkout_bundle_develop _checkout_bundle_master
 
-rpi-setup: fix_locale expand_root_fs enable_serial system_upgrade
+### system setup
+
+# public targets - initial setup
+
+setup-rpi: fix-locale _expand_root_fs _enable_serial system-upgrade
 	sudo aptitude -y install git usbmount
 
-opi-setup: fix_locale replace_fex enable_gpio system_upgrade
+setup-opi: fix-locale _replace_fex _enable_gpio system-upgrade
 	@echo "SYSTEM WILL NOW REBOOT"
 	sudo reboot
 
+# public targets - maintenance
 
-define fix_locale
+fix-locale:
+	$(call _fix_locale,$(LC_NAME))
+
+system-upgrade:
+	sudo apt-get -y update
+	sudo apt-get -y install aptitude
+	sudo aptitude -y upgrade
+
+# private defines
+
+define _fix_locale
     @if [ "x" != "x$(1)" ]; then \
         sum="`md5sum /etc/locale.gen`"; \
         sudo sed -i -re 's/^# *($(1).*)$$/\1/' /etc/locale.gen; \
@@ -21,28 +40,24 @@ define fix_locale
     fi
 endef
 
-fix_locale:
-	$(call fix_locale,$(LC_NAME))
+# private targets - Raspberry Pi
 
-expand_root_fs:
+_expand_root_fs:
 	sudo raspi-config nonint do_expand_rootfs
 	sudo partprobe
 
-enable_serial:
+_enable_serial:
 	sudo raspi-config nonint do_serial 1
 	sudo sed -i -re 's/^ *enable_uart *= *0 *$$/enable_uart=1/' /boot/config.txt
 
-system_upgrade:
-	sudo apt-get -y update
-	sudo apt-get -y install aptitude
-	sudo aptitude -y upgrade
+# private targets - Orange Pi
 
-replace_fex:
+_replace_fex:
 	sudo mv /boot/bin/orangepi2.bin /boot/bin/orangepi2.bin.orig
 	curl https://raw.githubusercontent.com/PRIArobotics/HedgehogLightSetup/master/res/orangepi2.fex | \
 	    fex2bin | sudo tee /boot/bin/orangepi2.bin > /dev/null
 
-enable_gpio:
+_enable_gpio:
 	sudo sed -i -re 's/^#+(gpio[-_]sunxi)$$/\1/' /etc/modules
 
 	sudo groupadd -f gpio
@@ -53,24 +68,49 @@ enable_gpio:
 	sudo chmod +x /etc/init.d/gpio-permissions
 	sudo update-rc.d gpio-permissions defaults
 
-get_bundle:
-	test -d HedgehogBundle || git clone https://github.com/PRIArobotics/HedgehogBundle.git
+### hedgehog installation
 
+# public targets
 
-python-setup:
+setup-hedgehog: setup-python setup-server setup-firmware
+
+setup-hedgehog-develop: setup-python setup-server-develop setup-firmware-develop
+
+setup-python:
 	sudo aptitude -y install python3-pip python-dev python3-dev
 	sudo pip3 install virtualenv
 
-server-setup: get_bundle
-	cd HedgehogBundle/server && make setup install
+setup-server: _checkout_bundle_master
+	cd HedgehogBundle/server && make setup
 
-server-develop-setup: get_bundle
-	cd HedgehogBundle/server && make setup-develop install
+setup-server-develop: _checkout_bundle_develop
+	cd HedgehogBundle/server && make setup-develop
 
-firmware-setup: get_bundle
+install-server:
+	cd HedgehogBundle/server && make install
+
+uninstall-server:
+	cd HedgehogBundle/server && make uninstall
+
+setup-firmware: _install_firmware_toolchain _checkout_bundle_master
+	cd HedgehogBundle/firmware && make setup all
+
+setup-firmware-develop: _install_firmware_toolchain _checkout_bundle_develop
+	cd HedgehogBundle/firmware && make setup-develop all
+
+install-firmware:
+	cd HedgehogBundle/firmware && make flash
+
+# private targets
+
+_install_firmware_toolchain:
 	sudo apt-get -y install gcc-arm-none-eabi libnewlib-arm-none-eabi
-	cd HedgehogBundle/firmware && make setup all flash
 
-firmware-develop-setup: get_bundle
-	sudo apt-get -y install gcc-arm-none-eabi libnewlib-arm-none-eabi
-	cd HedgehogBundle/firmware && make setup-develop all flash
+_clone_bundle:
+	test -d HedgehogBundle || git clone https://github.com/PRIArobotics/HedgehogBundle.git
+
+_checkout_bundle_develop: _clone_bundle
+	cd HedgehogBundle && git fetch origin develop && git checkout -B develop origin/develop
+
+_checkout_bundle_master: _clone_bundle
+	cd HedgehogBundle && git fetch origin master && git checkout -B master origin/master

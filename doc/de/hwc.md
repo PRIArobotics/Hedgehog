@@ -6,7 +6,11 @@ Unten wird weiters beschrieben, wie mit einer anderen Entwicklungsmaschine Progr
 Die folgende Installation der Toolchain und des Bundles können mit dem Setup-Makefile vereinfacht werden:
 
     cd
-    make firmware-setup
+    make setup-firmware
+    # oder
+    make setup-firmware-develop
+
+> **Achtung:** Die develop-Versionen sind generell weniger gut getestet als die offiziell veröffentlichten!
 
 ## C-Toolchain
 
@@ -20,6 +24,8 @@ Die Toolchain kann auf dem Raspberry Pi, oder auf einem anderen Debian-basierten
     sudo apt-get -y install libnewlib-arm-none-eabi
 
 ## Hedgehog Firmware Bundle
+
+> **TODO** aktualisieren
 
 Zum Entwickeln der Hedgehog Firmware gibt es das [Hedgehog Firmware Bundle](https://github.com/PRIArobotics/HedgehogFirmwareBundle),
 mit dem die Hedgehog-Firmware bequem entwickelt werden kann.
