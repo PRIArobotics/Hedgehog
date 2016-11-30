@@ -51,9 +51,9 @@ Das Setup-Skript wird folgendermaßen ausgeführt:
 Anschließend wird die eigentliche Hedgehog Light Software installiert:
 
     cd
-    make setup-hedgehog install-server
+    make setup-python setup-hedgehog install-server
     # oder - zur installation der Entwicklungs-Version
-    make setup-hedgehog-develop install-server
+    make setup-python setup-hedgehog-develop install-server
 
 Nun muss der Raspberry Pi neu gestartet werden, um die Aktivierung der UART-Schnittstelle anzuweden.
 Die UART-Schnittstelle ist zum Installieren der HWC-Firmware notwendig.

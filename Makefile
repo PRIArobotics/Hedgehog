@@ -72,9 +72,9 @@ _enable_gpio:
 
 # public targets
 
-setup-hedgehog: setup-python setup-server setup-server-raspberry setup-firmware
+setup-hedgehog: setup-server setup-server-raspberry setup-firmware
 
-setup-hedgehog-develop: setup-python setup-server-develop setup-server-raspberry setup-firmware-develop
+setup-hedgehog-develop: setup-server-develop setup-server-raspberry setup-firmware-develop
 
 setup-python:
 	sudo aptitude -y install python3-pip python-dev python3-dev
