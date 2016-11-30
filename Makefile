@@ -1,4 +1,4 @@
-.PHONY: setup-rpi setup-opi fix-locale system-upgrade \
+.PHONY: refresh-makefile setup-rpi setup-opi fix-locale system-upgrade \
 		_expand_root_fs _enable_serial _replace_fex _enable_gpio \
 		setup-hedgehog setup-hedgehog-develop setup-python \
 		setup-server setup-server-develop install-server uninstall-server \
@@ -6,6 +6,9 @@
 		_install_firmware_toolchain _clone_bundle _checkout_bundle_develop _checkout_bundle_master
 
 ### system setup
+
+refresh-makefile:
+	curl -O https://raw.githubusercontent.com/PRIArobotics/HedgehogLightSetup/master/Makefile
 
 # public targets - initial setup
 

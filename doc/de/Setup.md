@@ -39,6 +39,9 @@ Am einfachsten lädt man das benötigte Makefile direkt auf den Pi herunter:
 
 Alternativ kann man das [Makefile](https://raw.githubusercontent.com/PRIArobotics/HedgehogLightSetup/master/Makefile) vor dem ersten Starten auf die SD-Karte (nach `/home/pi`) laden.
 
+Beim Updaten kann man auch direkt `make refresh-makefile` benutzen.
+Dadurch wird das Makefile durch die aktuellste Version ersetzt.
+
 ## Setup ausführen
 
 Das Setup-Skript wird folgendermaßen ausgeführt:
