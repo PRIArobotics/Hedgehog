@@ -54,9 +54,9 @@ Das Setup-Skript wird folgendermaßen ausgeführt:
 Anschließend wird die eigentliche Hedgehog Light Software installiert:
 
     cd
-    make setup-python setup-hedgehog install-server
+    make setup-python setup-hedgehog install-server install-ide
     # oder - zur installation der Entwicklungs-Version
-    make setup-python setup-hedgehog-develop install-server
+    make setup-python setup-hedgehog-develop install-server install-ide
 
 Nun muss der Raspberry Pi neu gestartet werden, um die Aktivierung der UART-Schnittstelle anzuweden.
 Die UART-Schnittstelle ist zum Installieren der HWC-Firmware notwendig.
@@ -144,6 +144,10 @@ Damit wird die Firmware auf den HWC gespielt.
 Auf der SD-Karte wird dadurch keine Änderung durchgeführt;
 dieser Schritt ist also zwar Teil der Hedgehog-Installation,
 aber nicht zum erstellen eines vollständigen SD-Karten-Images.
+
+### `install-ide`
+
+Hiermit wird der Web Server so installiert, dass beim Starten des Hedgehog automatisch die IDE mitgestartet wird.
 
 ## (optional) Drahtlosnetzwerk einrichten
 
