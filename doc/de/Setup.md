@@ -22,6 +22,12 @@ Raspbian kann auch über BitTorrent heruntergeladen werden.
 
 Installationsanleitungen gibt es [hier](https://www.raspberrypi.org/documentation/installation/installing-images/README.md).
 
+### ssh aktivieren
+
+Seit November 2016 ist ssh bei Raspbian standardmäßig deaktiviert.
+Zum Aktivieren muss eine Datei mit dem Namen `ssh` auf der Boot-Partition hinterlegt werden.
+Sobald der Raspberry Pi gestartet wird, wird ssh aktiviert und die Datei gelöscht.
+
 ## Inbetriebnahme
 
 Details zur Verwendung des Pi (Ethernet, UART-Konsole, SSH) finden sich im [nächsten Dokument](Working.md).
