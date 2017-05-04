@@ -13,7 +13,7 @@ refresh-makefile:
 # public targets - initial setup
 
 setup-rpi: fix-locale _expand_root_fs _enable_serial system-upgrade
-	sudo aptitude -y install git usbmount
+	sudo aptitude -y install git usbmount samba
 
 setup-opi: fix-locale _replace_fex _enable_gpio system-upgrade
 	@echo "SYSTEM WILL NOW REBOOT"
@@ -117,7 +117,7 @@ install-ide:
 # private targets
 
 _install_firmware_toolchain:
-	sudo apt-get -y install gcc-arm-none-eabi libnewlib-arm-none-eabi
+	sudo aptitude -y install gcc-arm-none-eabi libnewlib-arm-none-eabi
 
 _clone_bundle:
 	test -d HedgehogBundle || git clone https://github.com/PRIArobotics/HedgehogBundle.git
