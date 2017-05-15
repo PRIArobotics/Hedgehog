@@ -1,4 +1,4 @@
-# OrangePi Setup Scripts for Hedgehog Light
+# Raspberry Pi Setup Scripts for Hedgehog Light
 
 Documentation in [English](doc/de/README.md) - **TODO**
 
