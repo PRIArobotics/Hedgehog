@@ -13,8 +13,8 @@ The HWC is responsible for
 - providing a steady power supply from a 6V-19V power source;
 - controlling servos and motors;
 - connecting analog and digital sensors with optional pullup/pulldown resistors;
-- providing additional connectors for serial buses, such as SPI
-- some miscellaneous outputs: a buzzer and four status LEDs
+- providing additional connectors for serial buses, such as SPI;
+- some miscellaneous outputs: a buzzer and four status LEDs.
 
 Except for the power supply, the HWC's microcontroller makes these features accessible to the SWC over a UART connection.
 
@@ -38,3 +38,42 @@ The Hedgehog IDE provides a visual Blockly programming environment and a Pyhon c
 
 This allows both beginners and intermediate users to write software easily.
 For advanced users that prefer to write code in an IDE of their choice, Hedgehog can be accessed via SSH as well.
+
+Hedgehog Protocol
+^^^^^^^^^^^^^^^^^
+
+When users write their robot programs, they of course need to access the robot's hardware somehow.
+With Hedgehog, this is done by connecting to the Hedgehog Server and communicating using Hedgehog Protocol messages.
+Usually the client program will run on the controller and connect locally, but that is not required.
+
+Once a client has initiated communication, both ends can send data at any time.
+Requests by clients are answered with a dedicated response, or a generic acknowledgement.
+In certain cases, the server may send additional updates after that.
+For example, after starting a child process, the server will send a message to the client when that process terminated.
+
+The Hedgehog Protocol is based on ZeroMQ_ and Protobuf_:
+ZeroMQ is a message queue library that makes it easy to do asynchronous and reliable networking,
+while Protobuf provides efficient and extensible serialization of datatypes.
+At the same time, both technologies support various programming languages.
+This makes it easy to implement the Hedgehog protocol in C, C++, C#, Go, Haskell, PHP, or Ruby, to name a few.
+Implementations in Python, node.js and Scala already exist, with the Python version being the most mature.
+
+.. _ZeroMQ: http://zeromq.org/
+.. _Protobuf: https://developers.google.com/protocol-buffers/
+
+Client APIs
+^^^^^^^^^^^
+
+While using the Hedgehog Protocol directly is the most flexible way of accessing Hedgehog's hardware,
+most people will use an API that provides a higher level of abstraction.
+Goals of a client API implementation should be:
+
+- clean and preferably asynchronous implementation of the Hedgehog Protocol;
+- making all features of Hedgehog accessible to the API's users;
+- providing a further, possibly limited set of APIs that are easy to use;
+- achieving these in a way that fits the spirit and intent of the programming language.
+
+The last of these goals means that Hedgehog APIs in different languages are not necessarily meant to look the same.
+Each implementation should use the features and conventions of their language, so that using the API feels "right".
+It would not make sense to force the structure of a great C API onto a Haskell one;
+learning proper Haskell with such a library would not work, and experienced Haskell programmers would get frustrated.
