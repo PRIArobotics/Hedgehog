@@ -8,7 +8,7 @@ If you somehow can't connect to your controller anymore, you can re-install ever
 Using a Hedgehog SD card image
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-TODO
+.. todo:: link to complete Hedgehog SD card images
 
 Installing from scratch
 ^^^^^^^^^^^^^^^^^^^^^^^
