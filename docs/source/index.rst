@@ -39,4 +39,5 @@ Learn More
 .. toctree::
    :maxdepth: 2
 
+   installation
    architecture
