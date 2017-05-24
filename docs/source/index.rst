@@ -9,7 +9,7 @@ Its most important features and properties are as follows:
     - use all capabilities of the built-in Raspberry Pi
     - all open hardware and software
     - no limitations for advances users
-- easy connectivity to programming machines
+- easy connectivity to programming devices
     - wired via Ethernet
     - wireles via WiFi
     - Web-based Hedgehog IDE or SSH
