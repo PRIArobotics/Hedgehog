@@ -34,7 +34,7 @@ Its most important features and properties are as follows:
       distributed systems, swarm intelligence, ...
 
 Learn More
-^^^^^^^^^^
+----------
 
 .. toctree::
    :maxdepth: 2
@@ -43,6 +43,6 @@ Learn More
    architecture
 
 TODOs
-^^^^^
+-----
 
 .. todolist::

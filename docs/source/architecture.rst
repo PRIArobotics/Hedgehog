@@ -6,7 +6,7 @@ The SWC is connected to a "shield" that grants access to actual robotics hardwar
 At the core of this so-called hardware-controller (HWC) sits an STM32F4 microcontroller for time-critical and low-level tasks.
 
 Hardware Controller
-^^^^^^^^^^^^^^^^^^^
+-------------------
 
 The HWC is responsible for
 
@@ -19,7 +19,7 @@ The HWC is responsible for
 Except for the power supply, the HWC's microcontroller makes these features accessible to the SWC over a UART connection.
 
 Software Controller
-^^^^^^^^^^^^^^^^^^^
+-------------------
 
 The SWC's responsibilities lie mostly in software.
 Hardware-wise, the Raspberry Pi's Ethernet and Wifi are used for connectivity, and additional peripherals such as webcams can be connected via USB.
@@ -40,7 +40,7 @@ This allows both beginners and intermediate users to write software easily.
 For advanced users that prefer to write code in an IDE of their choice, Hedgehog can be accessed via SSH as well.
 
 Hedgehog Protocol
-^^^^^^^^^^^^^^^^^
+-----------------
 
 When users write their robot programs, they of course need to access the robot's hardware somehow.
 With Hedgehog, this is done by connecting to the Hedgehog Server and communicating using Hedgehog Protocol messages.
@@ -62,7 +62,7 @@ Implementations in Python, node.js and Scala already exist, with the Python vers
 .. _Protobuf: https://developers.google.com/protocol-buffers/
 
 Client APIs
-^^^^^^^^^^^
+-----------
 
 While using the Hedgehog Protocol directly is the most flexible way of accessing Hedgehog's hardware,
 most people will use an API that provides a higher level of abstraction.

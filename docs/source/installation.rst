@@ -6,12 +6,12 @@ If you have bought a complete controller, it should have come with everything in
 If you somehow can't connect to your controller anymore, you can re-install everything as described here as a last resort.
 
 Using a Hedgehog SD card image
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------
 
 .. todo:: link to complete Hedgehog SD card images
 
 Installing from scratch
-^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------
 
 Installing a Hedgehog is a simple step-by-step procedure:
 
@@ -29,7 +29,7 @@ This means that you need to access your Hedgehog over the network, and/or provid
 We provide instructions for both
 
 Installing Raspbian
--------------------
+^^^^^^^^^^^^^^^^^^^
 
 Like any Raspberry Pi, Hedgehog needs an operating system.
 Downloads_ and `installation instructions`_ can be found at raspberrypi.org.
@@ -47,7 +47,7 @@ Otherwise, you can skip it.
 .. _installation instructions: https://www.raspberrypi.org/documentation/installation/installing-images/README.md
 
 Setting up SSH (optional)
--------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Newer versions of Raspbian require you to `enable SSH`_ first; this is a security measure, as SSH allows remote access to a computer.
 If you don't want to connect a monitor and keyboard, you will have to follow the instructions for "headless" devices,
@@ -57,10 +57,10 @@ The instructions also contain an overview of client software you can use on your
 .. _enable SSH: https://www.raspberrypi.org/documentation/remote-access/ssh/
 
 Connecting to the internet
---------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For installation of software only, Hedgehog requires an internet connection
 
 
 Installing the Hedgehog firmware
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------------
