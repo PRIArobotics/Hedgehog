@@ -1,3 +1,5 @@
+.. _home:
+
 Welcome to Hedgehog!
 ====================
 

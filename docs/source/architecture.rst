@@ -1,9 +1,13 @@
+.. _architecture:
+
 Architecture
 ============
 
 Hedgehog consists of two main pieces of hardware: high-level software runs on a Raspberry Pi (called software-controller, SWC).
 The SWC is connected to a "shield" that grants access to actual robotics hardware.
 At the core of this so-called hardware-controller (HWC) sits an STM32F4 microcontroller for time-critical and low-level tasks.
+
+.. _architecture-hwc:
 
 Hardware Controller
 -------------------
@@ -17,6 +21,8 @@ The HWC is responsible for
 - some miscellaneous outputs: a buzzer and four status LEDs.
 
 Except for the power supply, the HWC's microcontroller makes these features accessible to the SWC over a UART connection.
+
+.. _architecture-swc:
 
 Software Controller
 -------------------
@@ -39,6 +45,8 @@ The Hedgehog IDE provides a visual Blockly programming environment and a Pyhon c
 This allows both beginners and intermediate users to write software easily.
 For advanced users that prefer to write code in an IDE of their choice, Hedgehog can be accessed via SSH as well.
 
+.. _architecture-protocol:
+
 Hedgehog Protocol
 -----------------
 
@@ -60,6 +68,8 @@ Implementations in Python, node.js and Scala already exist, with the Python vers
 
 .. _ZeroMQ: http://zeromq.org/
 .. _Protobuf: https://developers.google.com/protocol-buffers/
+
+.. _architecture-apis:
 
 Client APIs
 -----------
