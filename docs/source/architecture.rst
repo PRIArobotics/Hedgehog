@@ -47,8 +47,8 @@ For advanced users that prefer to write code in an IDE of their choice, Hedgehog
 
 .. _architecture-protocol:
 
-Hedgehog Protocol
------------------
+Protocol
+--------
 
 When users write their robot programs, they of course need to access the robot's hardware somehow.
 With Hedgehog, this is done by connecting to the Hedgehog Server and communicating using Hedgehog Protocol messages.
