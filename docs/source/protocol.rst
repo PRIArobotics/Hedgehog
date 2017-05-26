@@ -100,10 +100,10 @@ When multiple requests are sent as part of the same ZeroMQ message, then and onl
 in a single response ZeroMQ message.
 There is no such guarantee for asynchronous updates; multiple updates may come in a single or separate ZeroMQ messages.
 
-.. _protocol-types:
+.. _protocol-serialization:
 
-Message types
--------------
+Message serialization
+---------------------
 
 Up until now, the communication structure was described: how to match requests with replies,
 and when asynchronous updates may be sent.
@@ -138,10 +138,10 @@ Let's look at a small Python example::
 
     print(msg.field)  # 42
 
-It's important to note that, to deserialize the message, we have to know it's a `Msg` in advance!
+It's important to note that, to deserialize the message, we have to know it's a ``Msg`` in advance!
 This means there has to be a single top-level message type for the Hedgehog protocol,
-which is fittingly called `HedgehogMessage`, and some sort of discrimination for the wrapped message types.
-Protobuf gives us the `oneof` feature, which does just that::
+which is fittingly called ``HedgehogMessage``, and some sort of discrimination for the wrapped message types.
+Protobuf gives us the ``oneof`` feature, which does just that::
 
     // `HedgehogMessage` represents a message of any kind of the Hedgehog protocol.
     message HedgehogMessage {
@@ -157,7 +157,7 @@ Protobuf gives us the `oneof` feature, which does just that::
         }
     }
 
-So `HedgehogMessage` is at the top of the message hierarchy;
-the `oneof payload` contains one of several concrete message types.
+So ``HedgehogMessage`` is at the top of the message hierarchy;
+the ``oneof payload`` contains one of several concrete message types.
 
 .. _original website: https://developers.google.com/protocol-buffers/
