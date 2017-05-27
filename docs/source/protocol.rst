@@ -25,9 +25,11 @@ Message kinds and order
 In the Hedgehog protocol, a message can be one of three kinds:
 
 A "request" or "action" is a message sent by a client to the server; conceptually, they are the same.
-If the message retrieves data, it is a request; if it's just performing an operation, it's an action.
+If the message's main purpose is to retrieve data, it is a request;
+if it's purpose is causing a side effect, it's an action.
 
-Requests and actions are answered by the server with "replies" and "acknowledgements".
+Requests and actions are answered by the server with "replies" or "acknowledgements".
+Replies carry result data, whereas acknowledgements do not; they just signal that a client's message was handled.
 Again, these are equivalent from a protocol standpoint, but depending on the particular message in question,
 one of the expressions is used.
 When talking about the protocol in general, they are used interchangeably.
