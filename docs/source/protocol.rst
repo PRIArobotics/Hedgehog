@@ -163,3 +163,153 @@ So ``HedgehogMessage`` is at the top of the message hierarchy;
 the ``oneof payload`` contains one of several concrete message types.
 
 .. _original website: https://developers.google.com/protocol-buffers/
+
+.. _protocol-types:
+
+Message types
+-------------
+
+The rest of the document will describe the different message types.
+Each type comes with a link to its message definition on GitHub, a short description, and the message's syntax.
+The message syntax describes how the message is used as a request, reply or asynchronous update,
+and for requests what is sent as a reply.
+For example, let's look at ``AnalogMessage``.
+Here is the definition, for reference::
+
+    message AnalogMessage {
+        uint32 port = 1;
+        uint32 value = 2;
+        Subscription subscription = 3;
+    }
+
+This is the corresponding syntax description::
+
+    => (port):  analog request => analog reply
+    <= (port, value):  analog reply
+    => (port, subscription):  analog subscribe => ack
+    <- (port, value, subscription):  analog update
+
+This tells us that ``AnalogMessage`` can be used in four different ways:
+
+- as `analog request`. The initial ``=>`` denotes it is a request, ``=> analog reply`` denotes the the kind of reply.
+  Only the ``port`` field is used in this case.
+- as `analog reply`. The ``<=`` denotes this is a reply message.
+- as `analog subscribe`. This is an action, its reply is an acknowledgement.
+- as `analog update`. The ``<-`` identifies this as an asynchronous update.
+
+Two additional notations are used: ``[field]`` indicates a field is optional in that syntax,
+and ``field1/field2`` means a choice of fields (usually through a ``oneof``).
+
+It should be noted that for primitive values (such as ``value``), the default value (e.g. zero) is indicated by skipping
+the field -- one can not determine whether a primitive field was given or not.
+Embedded messages (such as ``subscription``) on the other hand are encoded in a way that makes it possible to check for
+presence.
+
+This means that `analog request` and `analog reply` can not be distinguished on the wire.
+However, as they go in different directions, this does not pose a problem.
+In cases where there would be ambiguity, one message would have to use a different field in ``HedgehogMessage``.
+
+.. _protocol-types-list:
+
+List of message types
+^^^^^^^^^^^^^^^^^^^^^
+
+Acknowledgement
+    ::
+
+        <= (code, [message]):  ack
+
+IOAction
+    ::
+
+        => (port, flags):  IO action => ack
+
+IOCommandMessage
+    ::
+
+        => (port):  IO command request => IO command reply
+        <= (port, flags):  IO command reply
+        => (port, subscription):  IO command subscribe => ack
+        <- (port, flags, subscription):  IO command update
+
+AnalogMessage
+    ::
+
+        => (port):  analog request => analog reply
+        <= (port, value):  analog reply
+        => (port, subscription):  analog subscribe => ack
+        <- (port, value, subscription):  analog update
+
+DigitalMessage
+    ::
+
+        => (port):  digital request => digital reply
+        <= (port, value):  digital reply
+        => (port, subscription):  digital subscribe => ack
+        <- (port, value, subscription):  digital update
+
+MotorAction
+    ::
+
+        => (port, state, amount):  indefinite motor action => ack
+        => (port, state, amount, reached_state, relative/absolute):  terminating motor action => ack
+
+MotorCommandMessage
+    ::
+
+        => (port):  motor command request => motor command reply
+        <= (port, state, amount):  motor command reply
+        => (port, subscription):  motor command subscribe => ack
+        <- (port, state, amount, subscription):  motor command update
+
+MotorStateMessage
+    ::
+
+        => (port):  motor state request => motor state reply
+        <= (port, velocity, position):  motor state reply
+        => (port, subscription):  motor state subscribe => ack
+        <- (port, velocity, position, subscription):  motor state update
+
+MotorSetPositionAction
+    ::
+
+        => (port, position):  set motor position action => ack
+
+ServoAction
+    ::
+
+        => (port, active, position):  servo action => ack
+
+ServoCommandMessage
+    ::
+
+        => (port):  servo command request => servo command reply
+        <= (port, active, position):  servo command reply
+        => (port, subscription):  servo command subscribe => ack
+        <- (port, active, position, subscription):  servo command update
+
+ProcessExecuteAction
+    ::
+
+        => (*args, [working_dir]):  process execute action => process execute reply
+
+ProcessExecuteReply
+    ::
+
+        <= (pid):  process execute reply
+
+ProcessStreamMessage
+    ::
+
+        => (pid, fileno, chunk):  stream data action => ack
+        <- (pid, fileno, chunk):  stream data update
+
+ProcessSignalAction
+    ::
+
+        => (pid, signal): process signal action => ack
+
+ProcessExitUpdate
+    ::
+
+        <- (pid, exit_code):  process exit update
