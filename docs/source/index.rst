@@ -43,6 +43,7 @@ Learn More
 
     installation
     architecture
+    project_structure
     protocol
 
 TODOs
