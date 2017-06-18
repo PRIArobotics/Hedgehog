@@ -39,11 +39,11 @@ Learn More
 ----------
 
 .. toctree::
-   :maxdepth: 2
+    :maxdepth: 2
 
-   installation
-   architecture
-   protocol
+    installation
+    architecture
+    protocol
 
 TODOs
 -----
