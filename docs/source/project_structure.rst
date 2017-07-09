@@ -32,6 +32,8 @@ Hedgehog_PCB_
 HWC Software & Tools
 --------------------
 
+.. _repo-HedgehogLightFirmware:
+
 HedgehogLightFirmware_
     Firmware to run on the HWC's STM32 microcontroller, written in C.
 
