@@ -8,12 +8,12 @@ Hedgehog is particularly suited for educational use, but great care was taken to
 Its most important features and properties are as follows:
 
 - full control over your device
-    - use all capabilities of the built-in Raspberry Pi
+    - use all capabilities of the built-in Raspberry Pi 3
     - all open hardware and software
     - no limitations for advances users
 - easy connectivity to programming devices
     - wired via Ethernet
-    - wireles via WiFi
+    - wireless via WiFi
     - Web-based Hedgehog IDE or SSH
 - unified command protocol
     - control your Hedgehog locally or over the network
@@ -28,7 +28,7 @@ Its most important features and properties are as follows:
     - compatible with RC servos & DC motors, various analog and digital sensors
     - controller case can be mounted to Lego models
     - hardware blueprints (case & circuit boards) available for modification
-    - CAD design software, microcontroller toolchain, git, ... pre-installed on the controller
+    - CAD software, microcontroller toolchain, git, ... pre-installed on the controller
 - classroom ready
     - One WiFi for all controllers avoids network congestion
     - many educational use cases, appropriate for various ages
