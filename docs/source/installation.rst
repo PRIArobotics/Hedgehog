@@ -345,3 +345,30 @@ The server is stopped before that to make sure the serial connection is free::
 
 That's it!
 Your controller's firmware should be properly reinstalled.
+
+Tips & tricks
+-------------
+
+These are some tricks that may or may not be useful in your workflow.
+
+Modifying image files
+^^^^^^^^^^^^^^^^^^^^^
+
+On Linux, the ``losetup`` command can be used to use an image file as a loopback device::
+
+    sudo losetup -P /dev/loop0 path/to/image.img
+    # when finished, unmount the partitions, then detach the device:
+    sudo losetup -d /dev/loop0
+
+After setting up the loopback device, most linux systems will automatically mount the boot and root partitions.
+You can then inspect and even change the image contents, as if it were a real SD card.
+
+Installing development versions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The setup shown above installs released versions of the Hedgehog software.
+If you want to benefit from unreleased features and bugfixes, you can also install the latest code in our repositories:
+just replace the ``setup-hedgehog`` target with ``setup-hedgehog-develop``.
+
+.. note::
+    The makefile does currently not contain a development setup for the IDE.
