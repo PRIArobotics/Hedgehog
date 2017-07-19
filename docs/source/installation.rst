@@ -19,6 +19,10 @@ Hostname (`raspberrypi`), username (`pi`) and password (`raspberry`) are the Ras
 but unlike with Rasbian, SSH is enabled!
 We might disable SSH by default in future images.
 
+If you are re-installing your controller, that is probably it.
+However, if you have a never-used hardware board or there was a firmware update,
+or you just want to be on the safe side, go to the :ref:`firmware installation <installation-firmware>` section.
+
 .. _installation instructions: https://www.raspberrypi.org/documentation/installation/installing-images/README.md
 .. _Hedgehog image: http://webspace.pria.at/hedgehog/hedgehog_fresh_20170708_030000.img.zip
 
@@ -321,6 +325,8 @@ You are now done installing the Raspberry Pi software!
 If you are re-installing your controller, that is probably it.
 However, if you have a never-used hardware board or there was a firmware update,
 or you just want to be on the safe side, the next section shows how to install the firmware.
+
+.. _installation-firmware:
 
 Installing the Hedgehog Firmware
 --------------------------------
