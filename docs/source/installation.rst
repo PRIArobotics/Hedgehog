@@ -8,7 +8,16 @@ If you somehow can't connect to your controller anymore, you can re-install ever
 Using a Hedgehog SD card image
 ------------------------------
 
-.. todo:: link to complete Hedgehog SD card images
+By using a prepared image, you can save the time needed to follow the setup described below.
+Most often this is the way to go, as you can still install custom software on top of the prepared image,
+while saving time because most of the software and more recent system updates are already installed.
+
+Installing a Hedgehog image works the same way as installing plain Raspbian,
+`installation instructions`_ can be found at raspberrypi.org.
+Of course, instead of using a Raspbian image file, a `Hedgehog image`_ is used.
+
+.. _installation instructions: https://www.raspberrypi.org/documentation/installation/installing-images/README.md
+.. _Hedgehog image: http://webspace.pria.at/hedgehog/hedgehog_fresh_20170708_030000.img.zip
 
 Installing from scratch
 -----------------------
@@ -42,7 +51,6 @@ Once you are done, don't plug in your SD card and boot your Hedgehog just yet, e
 Continue with the next section.
 
 .. _Downloads: https://www.raspberrypi.org/downloads/raspbian/
-.. _installation instructions: https://www.raspberrypi.org/documentation/installation/installing-images/README.md
 
 Pre-Boot Setup in Headless Environment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -164,6 +172,8 @@ Newer versions of Raspbian require you to `enable SSH`_ before using it; this is
 The instructions also contain an overview of client software you can use on your computer.
 
 .. _enable SSH: https://www.raspberrypi.org/documentation/remote-access/ssh/
+
+.. _installation-connect-network:
 
 Connecting to a network & the Internet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
