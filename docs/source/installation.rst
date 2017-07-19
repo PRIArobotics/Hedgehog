@@ -15,7 +15,7 @@ while saving time because most of the software and more recent system updates ar
 Installing a Hedgehog image works the same way as installing plain Raspbian,
 `installation instructions`_ can be found at raspberrypi.org.
 Of course, instead of using a Raspbian image file, a `Hedgehog image`_ is used.
-Hostname (`raspberrypi`), username (`pi`) and password (`raspberry`) are the Raspbian defaults,
+Hostname (``raspberrypi``), username (``pi``) and password (``raspberry``) are the Raspbian defaults,
 but unlike with Rasbian, SSH is enabled!
 We might disable SSH by default in future images.
 
