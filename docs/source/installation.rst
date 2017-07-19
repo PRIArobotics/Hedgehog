@@ -266,7 +266,7 @@ It's necessary to reboot the controller for the change to take effect::
     sudo reboot
 
 Running the Hedgehog setup
---------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Now with network connections figured out, we can run the actual Hedgehog setup.
 To do this, run the following commands::
