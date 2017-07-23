@@ -279,7 +279,7 @@ To do this, run the following commands::
     make setup-rpi setup-python setup-hedgehog install-server install-ide
 
 The first command will download a Makefile, the actual Hedgehog setup script.
-The second command runs it, performing a couple of stacks;
+The second command runs it, performing a couple of tasks;
 this will download a lot of software (so make sure you don't run into a data limit, and have enough battery and time)
 and install it:
 
