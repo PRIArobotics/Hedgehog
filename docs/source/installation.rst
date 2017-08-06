@@ -155,7 +155,7 @@ Host name resolution is platform dependent and might not work on some platforms 
 (the actual software setup will install a package that adds Windows support,
 but that doesn't help for the very first connection).
 If it doesn't work, you need to find out the controller's IP address.
-If also have a keyboard and monitor, you can simply execute this command::
+If you also have a keyboard and monitor, you can simply execute this command::
 
     ifconfig
 
