@@ -8,7 +8,7 @@ This page shortly describes their roles and relations to each other.
 
 .. _GitHub: https://github.com/PRIArobotics/
 .. _Hedgehog_PCB: https://github.com/PRIArobotics/Hedgehog_PCB
-.. _HedgehogLightFirmware: https://github.com/PRIArobotics/HedgehogLightFirmware
+.. _HedgehogFirmware: https://github.com/PRIArobotics/HedgehogFirmware
 .. _HedgehogHWCFlasher: https://github.com/PRIArobotics/HedgehogHWCFlasher
 .. _HedgehogPlatform: https://github.com/PRIArobotics/HedgehogPlatform
 .. _HedgehogProtocol: https://github.com/PRIArobotics/HedgehogProtocol
@@ -16,7 +16,7 @@ This page shortly describes their roles and relations to each other.
 .. _hedgehog-ide: https://github.com/PRIArobotics/hedgehog-ide
 .. _HedgehogServer: https://github.com/PRIArobotics/HedgehogServer
 .. _HedgehogClient: https://github.com/PRIArobotics/HedgehogClient
-.. _HedgehogLightSetup: https://github.com/PRIArobotics/HedgehogLightSetup
+.. _Hedgehog: https://github.com/PRIArobotics/Hedgehog
 .. _HedgehogBundle: https://github.com/PRIArobotics/HedgehogBundle
 .. _HedgehogNodeClient: https://github.com/PRIArobotics/HedgehogNodeClient
 .. _HedgehogGui: https://github.com/PRIArobotics/HedgehogGui
@@ -32,9 +32,9 @@ Hedgehog_PCB_
 HWC Software & Tools
 --------------------
 
-.. _repo-HedgehogLightFirmware:
+.. _repo-HedgehogFirmware:
 
-HedgehogLightFirmware_
+HedgehogFirmware_
     Firmware to run on the HWC's STM32 microcontroller, written in C.
 
 .. _repo-HedgehogHWCFlasher:
@@ -120,7 +120,7 @@ HedgehogNodeClient_
 Miscellaneous
 -------------
 
-HedgehogLightSetup_
+Hedgehog_
     Contains this documentation, and also a Makefile that serves as the entry point into Hedgehog software installation.
     Executing the Makefile will clone the :ref:`HedgehogBundle <repo-HedgehogBundle>` and install different components.
 

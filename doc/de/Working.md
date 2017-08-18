@@ -1,6 +1,6 @@
 # Inbetriebnahme
 
-Diese Anleitung zeigt, wie man sich auf dem im Hedgehog Light verbauten Raspberry Pi anmeldet.
+Diese Anleitung zeigt, wie man sich auf dem im Hedgehog verbauten Raspberry Pi anmeldet.
 In den meisten Fällen ist das nicht notwendig, da über eine IDE bzw. das Hedgehog-Protokoll auf den Controller zugegriffen wird.
 Diese Anleitung ist für jene, die einen Hedgehog frisch installieren oder vollen Zugriff erlangen wollen.
 

@@ -1,9 +1,9 @@
-# Hedgehog Light
+# Hedgehog
 
-Der Hedgehog Light ist ein Roboter-Controller, der für den Einsatz in verschiedenen Anwendungsbereichen entwickelt wurde.
-Insbesondere ist Hedgehog Light auf den Bildungsbereich ausgelegt, allerdings wurde darauf geachtet,
+Der Hedgehog ist ein Roboter-Controller, der für den Einsatz in verschiedenen Anwendungsbereichen entwickelt wurde.
+Insbesondere ist Hedgehog auf den Bildungsbereich ausgelegt, allerdings wurde darauf geachtet,
 ein auch abseits von Klassenzimmern wertvolles Produkt zu erzeugen.
-Wichtige Merkmale von Hedgehog Light sind deshalb
+Wichtige Merkmale von Hedgehog sind deshalb
 
 - volle Kontrolle über das Gerät
     - alle Möglichkeiten des verbauten Raspberry Pi

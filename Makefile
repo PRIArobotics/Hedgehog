@@ -8,7 +8,7 @@
 ### system setup
 
 refresh-makefile:
-	curl -O https://raw.githubusercontent.com/PRIArobotics/HedgehogLightSetup/master/Makefile
+	curl -O https://raw.githubusercontent.com/PRIArobotics/Hedgehog/master/Makefile
 
 # public targets - initial setup
 
@@ -57,7 +57,7 @@ _enable_serial:
 
 _replace_fex:
 	sudo mv /boot/bin/orangepi2.bin /boot/bin/orangepi2.bin.orig
-	curl https://raw.githubusercontent.com/PRIArobotics/HedgehogLightSetup/master/res/orangepi2.fex | \
+	curl https://raw.githubusercontent.com/PRIArobotics/Hedgehog/master/res/orangepi2.fex | \
 	    fex2bin | sudo tee /boot/bin/orangepi2.bin > /dev/null
 
 _enable_gpio:
@@ -66,7 +66,7 @@ _enable_gpio:
 	sudo groupadd -f gpio
 	sudo usermod -a -G gpio `id -nu 1000`
 
-	curl https://raw.githubusercontent.com/PRIArobotics/HedgehogLightSetup/master/res/gpio-permissions | \
+	curl https://raw.githubusercontent.com/PRIArobotics/Hedgehog/master/res/gpio-permissions | \
 	    sudo tee /etc/init.d/gpio-permissions > /dev/null
 	sudo chmod +x /etc/init.d/gpio-permissions
 	sudo update-rc.d gpio-permissions defaults

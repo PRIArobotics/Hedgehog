@@ -40,10 +40,10 @@ Für die folgenden Setup-Schritte ist eine Internet-Verbindung notwendig.
 Am einfachsten lädt man das benötigte Makefile direkt auf den Pi herunter:
 
     cd
-    curl -O https://raw.githubusercontent.com/PRIArobotics/HedgehogLightSetup/master/Makefile
-    # oder: wget https://raw.githubusercontent.com/PRIArobotics/HedgehogLightSetup/master/Makefile
+    curl -O https://raw.githubusercontent.com/PRIArobotics/Hedgehog/master/Makefile
+    # oder: wget https://raw.githubusercontent.com/PRIArobotics/Hedgehog/master/Makefile
 
-Alternativ kann man das [Makefile](https://raw.githubusercontent.com/PRIArobotics/HedgehogLightSetup/master/Makefile) vor dem ersten Starten auf die SD-Karte (nach `/home/pi`) laden.
+Alternativ kann man das [Makefile](https://raw.githubusercontent.com/PRIArobotics/Hedgehog/master/Makefile) vor dem ersten Starten auf die SD-Karte (nach `/home/pi`) laden.
 
 Beim Updaten kann man auch direkt `make refresh-makefile` benutzen.
 Dadurch wird das Makefile durch die aktuellste Version ersetzt.
@@ -57,7 +57,7 @@ Das Setup-Skript wird folgendermaßen ausgeführt:
     # bzw. für Orange Pi (Legacy support für SHARK):
     make setup-opi
 
-Anschließend wird die eigentliche Hedgehog Light Software installiert:
+Anschließend wird die eigentliche Hedgehog Software installiert:
 
     cd
     make setup-python setup-hedgehog install-server install-ide

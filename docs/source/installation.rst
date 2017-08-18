@@ -275,7 +275,7 @@ Running the Hedgehog setup
 Now with network connections figured out, we can run the actual Hedgehog setup.
 To do this, run the following commands::
 
-    curl -O https://raw.githubusercontent.com/PRIArobotics/HedgehogLightSetup/master/Makefile
+    curl -O https://raw.githubusercontent.com/PRIArobotics/Hedgehog/master/Makefile
     make setup-rpi setup-python setup-hedgehog install-server install-ide
 
 The first command will download a Makefile, the actual Hedgehog setup script.
@@ -315,7 +315,7 @@ and install it:
 - install Hedgehog packages:
 
   - The :ref:`Hedgehog Server <repo-HedgehogServer>`
-  - The :ref:`Hedgehog Firmware <repo-HedgehogLightFirmware>`
+  - The :ref:`Hedgehog Firmware <repo-HedgehogFirmware>`
   - The :ref:`Hedgehog IDE <repo-hedgehog-ide>`
 
   The Server and IDE are installed to start automatically.
