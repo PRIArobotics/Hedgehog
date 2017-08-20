@@ -77,7 +77,11 @@ _enable_gpio:
 
 setup-hedgehog: setup-server setup-server-raspberry setup-firmware setup-ide
 
-setup-hedgehog-develop: setup-server-develop setup-server-raspberry setup-firmware-develop setup-ide-develop
+setup-hedgehog-develop: setup-server-develop setup-server-raspberry setup-firmware setup-ide-develop
+
+setup-hedgehog-light: setup-server setup-server-raspberry setup-firmware-light setup-ide
+
+setup-hedgehog-develop-light: setup-server-develop setup-server-raspberry setup-firmware-light setup-ide-develop
 
 setup-python:
 	sudo aptitude -y install python3-pip python-dev python3-dev
@@ -101,8 +105,8 @@ uninstall-server:
 setup-firmware: _install_firmware_toolchain _checkout_bundle_master
 	cd HedgehogBundle/firmware && make setup all
 
-setup-firmware-develop: _install_firmware_toolchain _checkout_bundle_develop
-	cd HedgehogBundle/firmware && make setup-develop all
+setup-firmware-light: _install_firmware_toolchain _checkout_bundle_develop
+	cd HedgehogBundle/firmware && make setup-light all
 
 install-firmware:
 	cd HedgehogBundle/firmware && make flash
