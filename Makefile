@@ -112,11 +112,16 @@ install-firmware:
 	cd HedgehogBundle/firmware && make flash
 
 setup-ide: _checkout_bundle_master
+	cd HedgehogBundle/ide && make setup all
 
 setup-ide-develop: _checkout_bundle_develop
+	cd HedgehogBundle/ide && make setup all
 
 install-ide:
-	cd HedgehogBundle/ide && make all
+	cd HedgehogBundle/ide && make install
+
+uninstall-ide:
+	cd HedgehogBundle/ide && make uninstall
 
 # private targets
 
