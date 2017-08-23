@@ -102,10 +102,10 @@ install-server:
 uninstall-server:
 	cd HedgehogBundle/server && make uninstall
 
-setup-firmware: _install_firmware_toolchain _checkout_bundle_master
+setup-firmware: _checkout_bundle_master
 	cd HedgehogBundle/firmware && make setup all
 
-setup-firmware-light: _install_firmware_toolchain _checkout_bundle_develop
+setup-firmware-light: _checkout_bundle_develop
 	cd HedgehogBundle/firmware && make setup-light all
 
 install-firmware:
@@ -119,9 +119,6 @@ install-ide:
 	cd HedgehogBundle/ide && make all
 
 # private targets
-
-_install_firmware_toolchain:
-	sudo aptitude -y install gcc-arm-none-eabi libnewlib-arm-none-eabi
 
 _clone_bundle:
 	test -d HedgehogBundle || git clone https://github.com/PRIArobotics/HedgehogBundle.git
