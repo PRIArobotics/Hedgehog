@@ -41,6 +41,7 @@ Learn More
 .. toctree::
     :maxdepth: 2
 
+    usage-basics
     installation
     architecture
     project_structure
