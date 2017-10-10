@@ -356,6 +356,7 @@ Modifying image files
 
 On Linux, the ``losetup`` command can be used to use an image file as a loopback device::
 
+    # add the -r option the work read-only
     sudo losetup -P /dev/loop0 path/to/image.img
     # when finished, unmount the partitions, then detach the device:
     sudo losetup -d /dev/loop0
