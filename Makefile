@@ -5,6 +5,8 @@
 		setup-firmware setup-firmware-develop install-firmware \
 		_install_firmware_toolchain _clone_bundle _checkout_bundle_develop _checkout_bundle_master
 
+PYTHON_VERSION = 3.6.4
+
 ### system setup
 
 refresh-makefile:
@@ -84,8 +86,17 @@ setup-hedgehog-light: setup-server setup-server-raspberry setup-firmware-light s
 setup-hedgehog-develop-light: setup-server-develop setup-server-raspberry setup-firmware-light setup-ide-develop
 
 setup-python:
-	sudo aptitude -y install python3-pip python-dev python3-dev
-	sudo pip3 install virtualenv
+	sudo aptitude -y install python3-pip python-dev python3-dev \
+		libssl-dev libbz2-dev libreadline-dev libsqlite3-dev
+	curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash
+	echo '' >> .bashrc
+	echo 'export PATH="/home/pi/.pyenv/bin:$$PATH"' >> .bashrc
+	echo 'eval "$$(pyenv init -)"' >> .bashrc
+	echo 'eval "$$(pyenv virtualenv-init -)"' >> .bashrc
+	
+	/home/pi/.pyenv/bin/pyenv install $(PYTHON_VERSION)
+	/home/pi/.pyenv/bin/pyenv global $(PYTHON_VERSION)
+	pip install virtualenv
 
 setup-server: _checkout_bundle_master
 	cd HedgehogBundle/server && make setup
