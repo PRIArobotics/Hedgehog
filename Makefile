@@ -96,7 +96,7 @@ setup-python:
 	
 	/home/pi/.pyenv/bin/pyenv install $(PYTHON_VERSION)
 	/home/pi/.pyenv/bin/pyenv global $(PYTHON_VERSION)
-	pip install virtualenv
+	/home/pi/.pyenv/shims/pip install virtualenv
 
 setup-server: _checkout_bundle_master
 	cd HedgehogBundle/server && make setup
@@ -123,16 +123,16 @@ install-firmware:
 	cd HedgehogBundle/firmware && make flash
 
 setup-ide: _checkout_bundle_master
-	cd HedgehogBundle/ide && make setup all
+	cd HedgehogBundle/ide && make setup-release
 
 setup-ide-develop: _checkout_bundle_develop
-	cd HedgehogBundle/ide && make setup all
+	cd HedgehogBundle/ide && make setup-develop
 
 install-ide:
-	cd HedgehogBundle/ide && make install
+	cd HedgehogBundle/ide && make enable-service
 
 uninstall-ide:
-	cd HedgehogBundle/ide && make uninstall
+	cd HedgehogBundle/ide && make disable-service
 
 # private targets
 
