@@ -5,7 +5,7 @@
 		setup-firmware setup-firmware-develop install-firmware \
 		_install_firmware_toolchain _clone_bundle _checkout_bundle_develop _checkout_bundle_master
 
-PYTHON_VERSION = 3.6.4
+PYTHON_VERSION = 3.7.1
 
 ### system setup
 
