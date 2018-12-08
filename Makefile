@@ -89,8 +89,9 @@ setup-hedgehog-light: setup-server setup-server-raspberry setup-firmware-light s
 setup-hedgehog-develop-light: setup-server-develop setup-server-raspberry setup-firmware-light setup-ide-develop
 
 setup-python:
-	sudo aptitude -y install python3-pip python-dev python3-dev \
-		libssl-dev libbz2-dev libreadline-dev libsqlite3-dev
+	sudo aptitude -y install libssl-dev libbz2-dev libreadline-dev libsqlite3-dev \
+	    zlib1g-dev xz-utils libxml2-dev libxmlsec1-dev \
+	    libncursesw5-dev libgdbm-dev tk-dev liblzma-dev uuid-dev libffi-dev
 	curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash
 	echo '' >> .bashrc
 	echo 'export PATH="/home/pi/.pyenv/bin:$$PATH"' >> .bashrc
@@ -99,7 +100,6 @@ setup-python:
 	
 	/home/pi/.pyenv/bin/pyenv install $(PYTHON_VERSION)
 	/home/pi/.pyenv/bin/pyenv global $(PYTHON_VERSION)
-	/home/pi/.pyenv/shims/pip install virtualenv
 
 setup-server: _checkout_bundle_master
 	cd HedgehogBundle/server && make setup
