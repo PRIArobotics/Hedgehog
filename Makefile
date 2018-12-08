@@ -16,6 +16,8 @@ refresh-makefile:
 
 setup-rpi: fix-locale _expand_root_fs _enable_serial system-upgrade
 	sudo aptitude -y install git usbmount samba
+	@echo "SYSTEM WILL NOW REBOOT"
+	sudo reboot
 
 setup-opi: fix-locale _replace_fex _enable_gpio system-upgrade
 	@echo "SYSTEM WILL NOW REBOOT"
@@ -30,6 +32,7 @@ system-upgrade:
 	sudo apt-get -y update
 	sudo apt-get -y install aptitude
 	sudo aptitude -y upgrade
+	sudo rpi-update
 
 # private defines
 
