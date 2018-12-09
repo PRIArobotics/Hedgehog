@@ -17,19 +17,20 @@ refresh-makefile:
 
 setup-rpi: fix-locale _expand_root_fs _enable_serial system-upgrade
 	sudo aptitude -y install git usbmount samba
-	@echo "SYSTEM WILL NOW REBOOT"
-	sudo reboot
 
 # public targets - maintenance
 
 fix-locale:
 	$(call _fix_locale,$(LC_NAME))
 
-system-upgrade:
+system-upgrade: rpi-update
 	sudo apt-get -y update
 	sudo apt-get -y install aptitude
 	sudo aptitude -y upgrade
+
+rpi-update:
 	sudo rpi-update
+	# a reboot is required to apply RPi firmware updates
 
 # private defines
 
