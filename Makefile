@@ -66,13 +66,13 @@ checkout-bundle-develop: _clone_bundle
 
 # public targets
 
-setup-hedgehog: setup-server setup-server-raspberry setup-firmware setup-ide
+setup-hedgehog: setup-server setup-firmware setup-ide
 
-setup-hedgehog-develop: setup-server-develop setup-server-raspberry setup-firmware setup-ide-develop
+setup-hedgehog-develop: setup-server-develop setup-firmware setup-ide-develop
 
-setup-hedgehog-light: setup-server setup-server-raspberry setup-firmware-light setup-ide
+setup-hedgehog-light: setup-server setup-firmware-light setup-ide
 
-setup-hedgehog-develop-light: setup-server-develop setup-server-raspberry setup-firmware-light setup-ide-develop
+setup-hedgehog-develop-light: setup-server-develop setup-firmware-light setup-ide-develop
 
 setup-python:
 	sudo aptitude -y install libssl-dev libbz2-dev libreadline-dev libsqlite3-dev \
@@ -98,9 +98,6 @@ setup-server: _clone_bundle
 
 setup-server-develop: _clone_bundle
 	cd HedgehogBundle/server && make setup-develop
-
-setup-server-raspberry:
-	cd HedgehogBundle/server && make with-raspberry
 
 install-server:
 	cd HedgehogBundle/server && make install
