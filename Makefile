@@ -6,6 +6,7 @@
 		_install_firmware_toolchain _clone_bundle _checkout_bundle_develop _checkout_bundle_master
 
 PYTHON_VERSION = 3.7.1
+NODE_VERSION = 8.14.0
 
 ### system setup
 
@@ -100,6 +101,12 @@ setup-python:
 	
 	/home/pi/.pyenv/bin/pyenv install $(PYTHON_VERSION)
 	/home/pi/.pyenv/bin/pyenv global $(PYTHON_VERSION)
+
+setup-node:
+	sudo aptitude -y install libssl-dev libzmq-dev libcurl4-gnutls-dev
+	curl -L https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+	
+	export NVM_DIR="$$HOME/.nvm" && . "$$NVM_DIR/nvm.sh" && nvm install $(NODE_VERSION)
 
 setup-server: _checkout_bundle_master
 	cd HedgehogBundle/server && make setup
