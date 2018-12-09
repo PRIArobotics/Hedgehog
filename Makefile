@@ -57,6 +57,12 @@ _enable_serial:
 
 ### Hedgehog installation
 
+checkout-bundle: _clone_bundle
+	cd HedgehogBundle && git fetch origin master && git checkout -B master origin/master
+
+checkout-bundle-develop: _clone_bundle
+	cd HedgehogBundle && git fetch origin develop && git checkout -B develop origin/develop
+
 # public targets
 
 setup-hedgehog: setup-server setup-server-raspberry setup-firmware setup-ide
@@ -86,10 +92,10 @@ setup-node:
 	
 	export NVM_DIR="$$HOME/.nvm" && . "$$NVM_DIR/nvm.sh" && nvm install $(NODE_VERSION)
 
-setup-server: _checkout_bundle_master
+setup-server: _clone_bundle
 	cd HedgehogBundle/server && make setup
 
-setup-server-develop: _checkout_bundle_develop
+setup-server-develop: _clone_bundle
 	cd HedgehogBundle/server && make setup-develop
 
 setup-server-raspberry:
@@ -101,19 +107,19 @@ install-server:
 uninstall-server:
 	cd HedgehogBundle/server && make uninstall
 
-setup-firmware: _checkout_bundle_master
+setup-firmware: _clone_bundle
 	cd HedgehogBundle/firmware && make setup all
 
-setup-firmware-light: _checkout_bundle_develop
+setup-firmware-light: _clone_bundle
 	cd HedgehogBundle/firmware && make setup-light all
 
 install-firmware:
 	cd HedgehogBundle/firmware && make flash
 
-setup-ide: _checkout_bundle_master
+setup-ide: _clone_bundle
 	cd HedgehogBundle/ide && make setup-release
 
-setup-ide-develop: _checkout_bundle_develop
+setup-ide-develop: _clone_bundle
 	cd HedgehogBundle/ide && make setup-develop
 
 install-ide:
@@ -126,9 +132,3 @@ uninstall-ide:
 
 _clone_bundle:
 	test -d HedgehogBundle || git clone https://github.com/PRIArobotics/HedgehogBundle.git
-
-_checkout_bundle_develop: _clone_bundle
-	cd HedgehogBundle && git fetch origin develop && git checkout -B develop origin/develop
-
-_checkout_bundle_master: _clone_bundle
-	cd HedgehogBundle && git fetch origin master && git checkout -B master origin/master
