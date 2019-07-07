@@ -29,7 +29,8 @@ system-upgrade: rpi-update
 	sudo aptitude -y upgrade
 
 rpi-update:
-	sudo rpi-update
+	# rpi-update warns against using it in a blanket fashion, so don't do it here
+	# sudo rpi-update
 	# a reboot is required to apply RPi firmware updates
 
 # private defines
