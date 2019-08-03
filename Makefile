@@ -6,7 +6,7 @@
 		_install_firmware_toolchain _clone_bundle _checkout_bundle_develop _checkout_bundle_master
 
 PYTHON_VERSION = 3.7.1
-NODE_VERSION = 8.14.0
+NODE_VERSION = 7.9.0
 
 ### system setup
 
