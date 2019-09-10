@@ -16,7 +16,7 @@ refresh-makefile:
 # public targets - initial setup
 
 setup-rpi: fix-locale _expand_root_fs _enable_serial system-upgrade
-	sudo aptitude -y install git usbmount samba
+	sudo aptitude -y install git samba
 
 # public targets - maintenance
 
