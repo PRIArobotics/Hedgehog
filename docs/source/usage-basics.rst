@@ -47,15 +47,10 @@ excessively large drives (> ~64GiB) and unsupported file systems (such as NTFS) 
 An example config file looks like this::
 
     [default]
-    # the controller name. this can be overwritten by passing `-n`, `--name`
-    name = Hedgehog {mode} {mac}
     # the server port. this can be overwritten by passing `-p`, `--port`
-    # it is STRONGLY advised to not change the port, because local programs
-    # connect to this port without using the discovery mechanism
+    # it is STRONGLY advised to not change the port,
+    # because programs connect to this port by default
     port = 10789
-    # additional services to advertise for discovery; 'hedgehog_server' is always advertised
-    # services listed here and on the command line using `--svc`, `--service` are merged
-    services =
 
     [wifi]
     # these commands are not stored as configuration on the controller,
