@@ -5,7 +5,7 @@
 		setup-firmware setup-firmware-develop install-firmware \
 		_install_firmware_toolchain _clone_bundle _checkout_bundle_develop _checkout_bundle_master
 
-PYTHON_VERSION = 3.7.1
+PYTHON_VERSION = 3.7.4
 NODE_VERSION = 7.9.0
 
 ### system setup
@@ -85,7 +85,7 @@ setup-python:
 	echo 'eval "$$(pyenv init -)"' >> .bashrc
 	echo 'eval "$$(pyenv virtualenv-init -)"' >> .bashrc
 	
-	/home/pi/.pyenv/bin/pyenv install $(PYTHON_VERSION)
+	CONFIGURE_OPTS="--enable-shared --enable-optimizations" /home/pi/.pyenv/bin/pyenv install $(PYTHON_VERSION)
 	/home/pi/.pyenv/bin/pyenv global $(PYTHON_VERSION)
 
 setup-node:
