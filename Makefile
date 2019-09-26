@@ -59,10 +59,10 @@ _enable_serial:
 ### Hedgehog installation
 
 checkout-bundle: _clone_bundle
-	cd HedgehogBundle && git fetch origin master && git checkout -B master origin/master
+	cd HedgehogBundle && git fetch origin +refs/heads/master:refs/remotes/origin/master && git checkout -B master origin/master
 
 checkout-bundle-develop: _clone_bundle
-	cd HedgehogBundle && git fetch origin develop && git checkout -B develop origin/develop
+	cd HedgehogBundle && git fetch origin +refs/heads/develop:refs/remotes/origin/develop && git checkout -B develop origin/develop
 
 # public targets
 
@@ -129,4 +129,4 @@ uninstall-ide:
 # private targets
 
 _clone_bundle:
-	test -d HedgehogBundle || git clone https://github.com/PRIArobotics/HedgehogBundle.git
+	test -d HedgehogBundle || git clone --depth 1 https://github.com/PRIArobotics/HedgehogBundle.git
