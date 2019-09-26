@@ -16,7 +16,7 @@ refresh-makefile:
 # public targets - initial setup
 
 setup-rpi: fix-locale _expand_root_fs _enable_serial system-upgrade
-	sudo aptitude -y install git samba
+	sudo apt -y install git samba
 
 # public targets - maintenance
 
@@ -24,9 +24,8 @@ fix-locale:
 	$(call _fix_locale,$(LC_NAME))
 
 system-upgrade: rpi-update
-	sudo apt-get -y update
-	sudo apt-get -y install aptitude
-	sudo aptitude -y upgrade
+	sudo apt -y update
+	sudo apt -y upgrade
 
 rpi-update:
 	# rpi-update warns against using it in a blanket fashion, so don't do it here
@@ -76,7 +75,7 @@ setup-hedgehog-light: setup-server setup-firmware-light setup-ide
 setup-hedgehog-develop-light: setup-server-develop setup-firmware-light setup-ide-develop
 
 setup-python:
-	sudo aptitude -y install libssl-dev libbz2-dev libreadline-dev libsqlite3-dev \
+	sudo apt -y install libssl-dev libbz2-dev libreadline-dev libsqlite3-dev \
 	    zlib1g-dev xz-utils libxml2-dev libxmlsec1-dev \
 	    libncursesw5-dev libgdbm-dev tk-dev liblzma-dev uuid-dev libffi-dev
 	curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash
@@ -89,7 +88,7 @@ setup-python:
 	/home/pi/.pyenv/bin/pyenv global $(PYTHON_VERSION)
 
 setup-node:
-	sudo aptitude -y install libssl-dev libzmq-dev libcurl4-gnutls-dev
+	sudo apt -y install libssl-dev libzmq-dev libcurl4-gnutls-dev
 	curl -L https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 	
 	export NVM_DIR="$$HOME/.nvm" && . "$$NVM_DIR/nvm.sh" && nvm install $(NODE_VERSION)
