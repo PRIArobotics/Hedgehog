@@ -64,68 +64,6 @@ checkout-bundle: _clone_bundle
 checkout-bundle-develop: _clone_bundle
 	cd HedgehogBundle && git fetch origin +refs/heads/develop:refs/remotes/origin/develop && git checkout -B develop origin/develop
 
-# public targets
-
-setup-hedgehog: setup-server setup-firmware setup-ide
-
-setup-hedgehog-develop: setup-server-develop setup-firmware setup-ide-develop
-
-setup-hedgehog-light: setup-server setup-firmware-light setup-ide
-
-setup-hedgehog-develop-light: setup-server-develop setup-firmware-light setup-ide-develop
-
-setup-python:
-	sudo apt -y install libssl-dev libbz2-dev libreadline-dev libsqlite3-dev \
-	    zlib1g-dev xz-utils libxml2-dev libxmlsec1-dev \
-	    libncursesw5-dev libgdbm-dev tk-dev liblzma-dev uuid-dev libffi-dev
-	curl -L https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer | bash
-	echo '' >> .bashrc
-	echo 'export PATH="/home/pi/.pyenv/bin:$$PATH"' >> .bashrc
-	echo 'eval "$$(pyenv init -)"' >> .bashrc
-	echo 'eval "$$(pyenv virtualenv-init -)"' >> .bashrc
-	
-	CONFIGURE_OPTS="--enable-shared --enable-optimizations" /home/pi/.pyenv/bin/pyenv install $(PYTHON_VERSION)
-	/home/pi/.pyenv/bin/pyenv global $(PYTHON_VERSION)
-
-setup-node:
-	sudo apt -y install libssl-dev libzmq-dev libcurl4-gnutls-dev
-	curl -L https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
-	
-	export NVM_DIR="$$HOME/.nvm" && . "$$NVM_DIR/nvm.sh" && nvm install $(NODE_VERSION)
-
-setup-server: _clone_bundle
-	cd HedgehogBundle/server && make setup
-
-setup-server-develop: _clone_bundle
-	cd HedgehogBundle/server && make setup-develop
-
-install-server:
-	cd HedgehogBundle/server && make install
-
-uninstall-server:
-	cd HedgehogBundle/server && make uninstall
-
-setup-firmware: _clone_bundle
-	cd HedgehogBundle/firmware && make setup all
-
-setup-firmware-light: _clone_bundle
-	cd HedgehogBundle/firmware && make setup-light all
-
-install-firmware:
-	cd HedgehogBundle/firmware && make flash
-
-setup-ide: _clone_bundle
-	cd HedgehogBundle/ide && make setup-release
-
-setup-ide-develop: _clone_bundle
-	cd HedgehogBundle/ide && make setup-develop
-
-install-ide:
-	cd HedgehogBundle/ide && make enable-service
-
-uninstall-ide:
-	cd HedgehogBundle/ide && make disable-service
-
 # private targets
 
 _clone_bundle:
