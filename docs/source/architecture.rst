@@ -14,7 +14,7 @@ Hardware Controller
 
 The HWC is responsible for
 
-- providing a steady power supply from a 6V-19V power source;
+- providing a steady power supply from a 6V-24V power source;
 - controlling servos and motors;
 - connecting analog and digital sensors with optional pullup/pulldown resistors;
 - providing additional connectors for serial buses, such as SPI;
@@ -36,7 +36,7 @@ Of course, keyboard, mouse and monitor can also be directly connected via USB an
 The SWC runs Raspbian as its operating system, and hosts the Hedgehog Server and Hedgehog Web IDE.
 Hedgehog Server acts as an intermediary between client programs and the HWC.
 It makes sure that all clients can access the hardware correctly, even if there are multiple clients,
-and allows clients to connect bot locally and over the network using the Hedgehog Protocol.
+and allows clients to connect both locally and over the network using the Hedgehog Protocol.
 
 The Hedgehog Web IDE is a web application that is hosted on the controller, meaning that an internet connection is not required for using Hedgehog.
 Yet, using a browser-based development environment means that no installation is required and multiple operating systems can be supported with ease.

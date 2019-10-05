@@ -19,16 +19,16 @@ Its most important features and properties are as follows:
     - control your Hedgehog locally or over the network
     - protocol stack designed for reliability
     - easy to implement in many popular programming languages
-    - few assumptions to allow for various approaches in programming interfaces
+    - few assumptions to allow for diverse programming interfaces
 - versatile application programming interfaces (APIs)
     - visual programming via Blockly
-    - textual programming mainly via Python, but node.js and Java already supported as well
+    - textual programming mainly via Python, but node.js already supported as well
     - simple, yet not limiting
 - made for tinkering and hacking
     - compatible with RC servos & DC motors, various analog and digital sensors
     - controller case can be mounted to Lego models
     - hardware blueprints (case & circuit boards) available for modification
-    - CAD software, microcontroller toolchain, git, ... pre-installed on the controller
+    - microcontroller toolchain, git, ... pre-installed on the controller
 - classroom ready
     - One WiFi for all controllers avoids network congestion
     - many educational use cases, appropriate for various ages

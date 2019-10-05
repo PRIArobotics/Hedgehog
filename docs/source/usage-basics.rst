@@ -6,6 +6,20 @@ Usage Basics
 Hedgehog is simple to use, but without a display to show you exactly what to do after booting up,
 some documentation and explanation is necessary.
 
+Turning Hedgehog on and off
+---------------------------
+
+To switch Hedgehog on or off, press its red power button until you hear a sound.
+The power LED will show a rising pulse while Hedgehog is booting,
+and a falling pulse while shutting down.
+After successful boot, the power LED will remain turned on.
+
+.. note::
+    If the power LED does not stop pulsing after turning Hedgehog on,
+    either the boot service on the Raspberry Pi is not working correctly,
+    or an old firmware is installed.
+    Neither should happen if following the installation instructions.
+
 Setting up a network connection
 -------------------------------
 
@@ -31,6 +45,8 @@ Using a wired network
 
 If you prefer a wired connection, you can use the Hedgehog's Ethernet port,
 but (as with WiFi) you will have to ensure that the network provides a DHCP address to the controller.
+Connecting to a router would normally work.
+
 If you want to connect directly to your computer,
 you will have to configure something like connection forwarding in a platform-dependent way.
 In the installation document, :ref:`installation-share-internet` describes this for selected platforms.
@@ -39,60 +55,50 @@ Changing the network configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If you can't (or don't want to) use the default ``hedgehog`` network,
-there is a simple mechanism to provide alternative network configurations over a config file on a flash drive.
+there is a simple mechanism to provide alternative network configurations on a flash drive.
 The new configuration is stored on the controller, so this is only necessary when network settings change.
-
 The caveats for flashdrives on the Raspberry Pi/Raspbian apply:
 excessively large drives (> ~64GiB) and unsupported file systems (such as NTFS) may not work.
-An example config file looks like this::
 
-    [default]
-    # the server port. this can be overwritten by passing `-p`, `--port`
-    # it is STRONGLY advised to not change the port,
-    # because programs connect to this port by default
-    port = 10789
+To change the network configuration, put a file named ``wpa_supplicant.conf`` on your flash drive like this::
 
-    [wifi]
-    # these commands are not stored as configuration on the controller,
-    # they are executed once by passing them to wpa_cli
-    commands =
-        # "flush" clears any previous configuration; it is generally necessary to have predictable network numbers
-        flush
-        add_network
-        set_network 0 ssid "hedgehog"
-        set_network 0 key_mgmt WPA-PSK
-        set_network 0 psk "hedgehog"
-        enable_network 0
-        # "save_config" stores the settings to wpa_supplicant.conf, so that the settings persist after a reboot
-        save_config
+    ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+    update_config=1
+    country=AT
 
-.. todo::
-    Skipping the ``default`` section will currently delete that part of the configuration.
-    Make it non-mandatory!
+    network={
+        ssid="hedgehog"
+        key_mgmt=WPA-PSK
+        psk="hedgehog"
+    }
 
-The relevant part here is the ``[wifi]`` section, containing a ``commands`` option.
-This option contains any number of indented lines used to configure WiFi using the Linux ``wpa_cli`` command.
-For details on using ``wpa_cli``, refer to :ref:`the installation document <installation-connect-network>`,
-particularly the comments on non-interactive usage.
-You can also refer to the Linux man pages for more detailed information::
+You may want to change the country, and of course substitute your own network SSID and pre-shared key ("psk").
 
-    man wpa_cli
-    man wpa_supplicant.conf
+.. note::
+    You can refer to the `wpa_supplicant.conf manpages`_ for more information on this configuration file.
+
+.. _wpa_supplicant.conf manpages: https://manpage.me/?q=wpa_supplicant.conf
+
+Once this file is on your flash drive, plug it into your turned off Hedgehog, and turn it on.
+Once the power LED has stopped pulsing, the configuration file has been copied onto your Hedgehog.
+Reboot once more, and Hedgehog should connect to the newly configured WiFi network.
 
 Using the Hedgehog IDE
 ----------------------
 
 The Hedgehog IDE is the most common interface for working with Hedgehog.
-Once a network connection is established, it can be accessed via a web browser.
+Once a network connection is established,
+it can be accessed via a web browser by navigating to the Hedgehog's host name.
+
+``raspberrypi`` is the default hostname for a Raspbian installation, including Hedgehog.
+Our Hedgehogs ship with a hostname based on its serial number,
+which can be seen through the transparent Hedgehog case.
+For example, Hedgehog controller ``9`` would have hostname ``hedgehog9``.
+
 The IDE was most thoroughly tested on Chrome/Chromium, so we recommend this browser whenever possible.
 Other browsers should work as well, though.
-
-In the browser, open the address ``http://raspberrypi.local/``, where ``raspberrypi`` is the Hedgehog's host name.
+In the browser, open the address ``http://raspberrypi.local/``, replacing ``raspberrypi`` by the Hedgehog's host name.
 Write out the full address, as some browsers may think ``raspberrypi.local`` is a search term, not an address.
-
-If you changed the host name of your device, replace that part with whatever you configured.
-If you got a Hedgehog controller with a number on it,
-the host name is normally set to ``hedgehog#``, with ``#`` being that number.
 
 The browser should show a circular loading sign and quickly load the IDE's main screen.
 

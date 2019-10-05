@@ -8,17 +8,21 @@ This page shortly describes their roles and relations to each other.
 
 .. _GitHub: https://github.com/PRIArobotics/
 .. _Hedgehog_PCB: https://github.com/PRIArobotics/Hedgehog_PCB
+.. _HedgehogCase: https://github.com/PRIArobotics/HedgehogCase
 .. _HedgehogFirmware: https://github.com/PRIArobotics/HedgehogFirmware
-.. _HedgehogHWCFlasher: https://github.com/PRIArobotics/HedgehogHWCFlasher
 .. _HedgehogPlatform: https://github.com/PRIArobotics/HedgehogPlatform
 .. _HedgehogProtocol: https://github.com/PRIArobotics/HedgehogProtocol
 .. _HedgehogUtils: https://github.com/PRIArobotics/HedgehogUtils
 .. _hedgehog-ide: https://github.com/PRIArobotics/hedgehog-ide
 .. _HedgehogServer: https://github.com/PRIArobotics/HedgehogServer
 .. _HedgehogClient: https://github.com/PRIArobotics/HedgehogClient
+.. _HedgehogNodeClient: https://github.com/PRIArobotics/HedgehogNodeClient
 .. _Hedgehog: https://github.com/PRIArobotics/Hedgehog
 .. _HedgehogBundle: https://github.com/PRIArobotics/HedgehogBundle
-.. _HedgehogNodeClient: https://github.com/PRIArobotics/HedgehogNodeClient
+.. _HedgehogTester: https://github.com/PRIArobotics/HedgehogTester
+
+.. _HedgehogProtocolSpec: https://github.com/PRIArobotics/HedgehogProtocolSpec
+.. _HedgehogHWCFlasher: https://github.com/PRIArobotics/HedgehogHWCFlasher
 .. _HedgehogGui: https://github.com/PRIArobotics/HedgehogGui
 
 Hardware
@@ -27,7 +31,8 @@ Hardware
 Hedgehog_PCB_
     KiCad schematics and layouts of Hedgehog's hardware controller.
 
-.. TODO Case
+HedgehogCase_
+    3D models and SVG laser cutting files of Hedgehog's case.
 
 HWC Software & Tools
 --------------------
@@ -37,13 +42,6 @@ HWC Software & Tools
 HedgehogFirmware_
     Firmware to run on the HWC's STM32 microcontroller, written in C.
 
-.. _repo-HedgehogHWCFlasher:
-
-HedgehogHWCFlasher_
-    A simple Python program for flashing the HWC microcontroller with binaries.
-    It uses :ref:`HedgehogPlatform <repo-HedgehogPlatform>` To determine how to connect to the microcontroller,
-    i.e. what interface to use and how to reset the microcontroller.
-
 Common Python Packages
 ----------------------
 
@@ -52,7 +50,6 @@ Common Python Packages
 HedgehogUtils_
     Collection of Python utilities for Hedgehog, but not specific to a particular part of the software.
     Utilities are mostly for Protocol Buffers and ZeroMQ,
-    additionally there is a stand-alone discovery component building on both.
 
 .. _repo-HedgehogPlatform:
 
@@ -60,7 +57,7 @@ HedgehogPlatform_
     Python library that detects the "platform" that Hedgehog software is run on, i.e. the kind of software controller used,
     and provides platform independent interfaces on top of features that differ by platform.
     Right now, the only feature that is abstracted in this way is access to the HWC,
-    used by :ref:`HedgehogHWCFlasher <repo-HedgehogHWCFlasher>` and :ref:`HedgehogServer <repo-HedgehogServer>`.
+    used by :ref:`HedgehogServer <repo-HedgehogServer>`.
 
     The only platform that is currently used for Hedgehog is the Raspberry Pi 3.
     In the past, an Orange Pi 2 was used instead.
@@ -93,7 +90,6 @@ HedgehogServer_
     The server is written in Python and builds on :ref:`HedgehogProtocol <repo-HedgehogProtocol>`.
     To handle client requests, the server communicates with the HWC,
     utilizing :ref:`HedgehogPlatform <repo-HedgehogPlatform>` to determine how to do that.
-    :ref:`HedgehogUtils' <repo-HedgehogUtils>` discovery mechanism is used for advertising the controller to its peers.
 
 .. _repo-hedgehog-ide:
 
@@ -107,8 +103,7 @@ Client Software
 
 HedgehogClient_
     Python client library for Hedgehog.
-    The library builds on top of :ref:`HedgehogProtocol <repo-HedgehogProtocol>`,
-    and uses :ref:`HedgehogUtils' <repo-HedgehogUtils>` discovery mechanism for finding controllers.
+    The library builds on top of :ref:`HedgehogProtocol <repo-HedgehogProtocol>`.
 
 .. _repo-HedgehogNodeClient:
 
@@ -122,14 +117,13 @@ Miscellaneous
 
 Hedgehog_
     Contains this documentation, and also a Makefile that serves as the entry point into Hedgehog software installation.
-    Executing the Makefile will clone the :ref:`HedgehogBundle <repo-HedgehogBundle>` and install different components.
 
 .. _repo-HedgehogBundle:
 
 HedgehogBundle_
     Bundles installation scripts into one repository.
-    The bundle contains folders for installations of the HWC firmware, server, IDE and client.
+    The bundle contains folders for installations of Python, Node, OpenCV, protoc,
+    the HWC firmware, server, IDE, client, and boot service.
 
-HedgehogGui_
-    A desktop Python application based on Kivy for writing and running Python client programs.
-    It is not actively developed, as it was superseded by :ref:`hedgehog-ide <repo-hedgehog-ide>`.
+HedgehogTester_
+    A simple client program that helps testing all of Hedgehog's hardware.
