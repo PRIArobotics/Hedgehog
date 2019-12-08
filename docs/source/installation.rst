@@ -28,7 +28,7 @@ However, if you have a never-used hardware board or there was a firmware update,
 or you just want to be on the safe side, go to the :ref:`firmware installation <installation-firmware>` section.
 
 .. _installation instructions: https://www.raspberrypi.org/documentation/installation/installing-images/README.md
-.. _Hedgehog image: http://webspace.pria.at/hedgehog/hedgehog_fresh_20171004_000000.img.zip
+.. _Hedgehog image: http://webspace.pria.at/hedgehog/hedgehog_fresh_20191004_000000.img.zip
 
 Installing from scratch
 -----------------------
