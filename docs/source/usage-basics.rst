@@ -6,8 +6,12 @@ Usage Basics
 Hedgehog is simple to use, but without a display to show you exactly what to do after booting up,
 some documentation and explanation is necessary.
 
-Turning Hedgehog on and off
+Power & turning Hedgehog on and off
 ---------------------------
+
+Hedgehog has a power cord for connecting your power source - usually a lithium battery.
+The micro USB port of the Raspberry Pi (which is not exposed by Hedgehog's case)
+should **not** be used in combination with the Hedgehog shield!
 
 To switch Hedgehog on or off, press its red power button until you hear a sound.
 The power LED will show a rising pulse while Hedgehog is booting,
@@ -19,6 +23,10 @@ After successful boot, the power LED will remain turned on.
     either the boot service on the Raspberry Pi is not working correctly,
     or an old firmware is installed.
     Neither should happen if following the installation instructions.
+
+Hedgehog will start beeping when its battery runs low on power.
+To avoid damaging the battery, which might increase the risk of fire,
+shut down Hedgehog as quickly as possible in that case!
 
 Setting up a network connection
 -------------------------------
